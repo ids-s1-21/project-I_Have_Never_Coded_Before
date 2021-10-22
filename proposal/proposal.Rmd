@@ -20,6 +20,9 @@ library(broom)
 
 
 ## 3. Data analysis plan
-
+Main hypothesis is whether there is a link between dying by the police and being innocent. Our prediction is there is not a significant link between the two factors. The variables we will use to answer the question are: highest level of force, alleged weapon, aggressive physical movement, fleeing / not fleeing, dispositions / exclusions. 
+A comparison group could be any of the following or all the following categories, aggressive physical movement, alleged weapon, fleeing / not fleeing.
+Side hypothesis' could include: whether there is a link between race and being killed by the police, whether there is a link to age and being killed by the police, whether there is a link between what state you are in and being killed by the police, whether there is a link between mental health and being killed by the police.
+The percentage of innocent people who died out of all the people who died, could be a useful indicator, bar chart with variables fleeing and not fleeing, graph showing out of the people who died if they had a weapon what weapon they had, whether an aggressive physical movement increases your chances of being killed, out of the innocent people who died what were they killed by may be a difference between being shot and killed in a police pursuit. Out of the people who we put in our "innocent" group how many of the cases had dispositions or exclusions.
 
 
