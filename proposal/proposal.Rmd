@@ -12,8 +12,9 @@ library(broom)
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
+Our general research question: Is their a link between dying by the police and being innocent? The dataset that was downloaded for this project is from a website called Kaggle and the data in the dataset comes from a website called Fatal Encounters. They have 3 main ways that they collect the data. The first way they collect the data is paying researchers, and around 85% of their data comes from these reliable and trusted researchers in the data. The second way they collect data is from Public Record Requests, and the third is from crowd sourced data which is filtered throughly to accurately report everything. 
 
-
+The variables that we are going to be using is going to be every single one except for the URL of image, location of injury (address), location zip code, full address, URL Temp, Brief Description, Supporting Document Link, Longitude, and Latitude. This would mean we have 18 variables in total to work with.
 
 ## 2. Data
 
