@@ -13,6 +13,43 @@ the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
 
+Our general research question: Is their a link between dying by the
+police and being innocent? The dataset that was downloaded for this
+project is from a website called Kaggle and the data in the dataset
+comes from a website called Fatal Encounters. They have 3 main ways that
+they collect the data. The first way they collect the data is paying
+researchers, and around 85% of their data comes from these reliable and
+trusted researchers in the data. The second way they collect data is
+from Public Record Requests, and the third is from crowd sourced data
+which is filtered throughly to accurately report everything.
+
+The variables that we are going to be using is going to be every single
+one except for the URL of image, location of injury (address), location
+zip code, full address, URL Temp, Brief Description, Supporting Document
+Link, Longitude, and Latitude. This would mean we have 18 variables in
+total to work with.
+
 ## 2. Data
 
 ## 3. Data analysis plan
+
+Main hypothesis is whether there is a link between dying by the police
+and being innocent. Our prediction is there is not a significant link
+between the two factors. The variables we will use to answer the
+question are: highest level of force, alleged weapon, aggressive
+physical movement, fleeing / not fleeing, dispositions / exclusions. A
+comparison group could be any of the following or all the following
+categories, aggressive physical movement, alleged weapon, fleeing / not
+fleeing. Side hypothesis’ could include: whether there is a link between
+race and being killed by the police, whether there is a link to age and
+being killed by the police, whether there is a link between what state
+you are in and being killed by the police, whether there is a link
+between mental health and being killed by the police. The percentage of
+innocent people who died out of all the people who died, could be a
+useful indicator, bar chart with variables fleeing and not fleeing,
+graph showing out of the people who died if they had a weapon what
+weapon they had, whether an aggressive physical movement increases your
+chances of being killed, out of the innocent people who died what were
+they killed by may be a difference between being shot and killed in a
+police pursuit. Out of the people who we put in our “innocent” group how
+many of the cases had dispositions or exclusions.
