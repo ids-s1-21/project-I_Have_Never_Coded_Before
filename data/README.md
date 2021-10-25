@@ -1,11 +1,6 @@
-# data
+Innocent Deaths caused by Police (All time)
 
-Place data file(s) in this folder.
-
-Then, include codebooks (variables, and their descriptions) for your data file(s)
-using the following format.
-
-## Innocent Deaths caused by Police (All time)
+A data frame with 30860 rows and 27 variables.
 
 - `Unique ID`: ID identifying person who died
 - `Name`: Name of Subject, including nicknames if available. Where it reads "Names withheld by police" the names have been failed to publish by police or sometimes withheld voluntairy by the media in the instances of suicide. Also where there is "aka" in the entry it is often because news media and police have failed to identify transgender people by the names and genders which they have chosen.
@@ -19,8 +14,6 @@ using the following format.
 - `Location of death (zip code)` : The best zipcode location where the injury resulting in their death occurred.
 - `Location of death (county)` : The best county location where the injury resulting in their death occurred.
 - `Full Address` The most accurate full address where the injury resulting in their death occurred.
-- `Latitude` : Latitude of where the injury resulting in their death occurred.
-- `Longitude` : Longitude of where the injury resulting in their death occurred.
 - `Agency or agencies involved` : Police agency involved in persons death
 - `Highest level of force` : What the highest level of force the police used in the incident where the person died
 - `Alleged weapon` : Whether the person was bearing a weapon 
