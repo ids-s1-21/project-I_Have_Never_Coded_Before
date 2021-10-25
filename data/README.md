@@ -21,5 +21,9 @@ A data frame with 30860 rows and 27 variables.
 - `Fleeing/Not fleeing` : Whether person was fleeing for the police or not.
 - `Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS` : Outcome of police involved from police investigation into incident
 - `Intended use of force (Developing)` : What the intended use of force was by police officers involved in death.
-- `Foreknowledge of mental illness` : Wherther police were aware of history of mental illness.
+- `Foreknowledge of mental illness` : Whether police were aware of history of mental illness.
+
+
+
+
 
