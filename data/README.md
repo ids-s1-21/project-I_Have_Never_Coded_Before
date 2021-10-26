@@ -1,5 +1,6 @@
 Innocent Deaths caused by Police (All time)
 
+
 A data frame with 30860 rows and 27 variables.
 
 - `Unique ID`: ID identifying person who died
