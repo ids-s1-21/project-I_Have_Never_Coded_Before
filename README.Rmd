@@ -1,6 +1,6 @@
 ---
-title: Project title
-author: by Team name
+title: Innocent Death's caused by Police Project
+author: by I Have Never Coded Before
 output: github_document
 ---
 
@@ -21,8 +21,10 @@ Your results with proper output and graphics go in your presentation, this space
 
 ```{r load-data, echo = FALSE}
 library(tidyverse)
-#read_csv(file = 'Innocent Deaths caused by Police (All time).csv')
-#glimpse(Innocent_Deaths_caused_by_Police_All_time_)
+Innocent_Deaths_caused_by_Police_All_time_ <- read_csv("data/Innocent Deaths caused by Police (All time).csv")
+head(Innocent_Deaths_caused_by_Police_All_time_)
+
+
 ```
 
 ## Presentation

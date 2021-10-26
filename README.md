@@ -1,6 +1,6 @@
-Project title
+Innocent Death’s caused by Police Project
 ================
-by Team name
+by I Have Never Coded Before
 
 ## Summary
 
@@ -32,6 +32,37 @@ your project.
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
+
+    ## Warning: One or more parsing issues, see `problems()` for details
+
+    ## Rows: 30860 Columns: 27
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (21): Name, Gender, Race, URL of image, Date of injury resulting in deat...
+    ## dbl  (5): Unique ID, Age, Location of death (zip code), Latitude, Longitude
+    ## lgl  (1): URL Temp
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+    ## # A tibble: 6 × 27
+    ##   `Unique ID` Name                    Age Gender Race  `URL of image` `Date of injury…
+    ##         <dbl> <chr>                 <dbl> <chr>  <chr> <chr>          <chr>           
+    ## 1       25747 Mark A. Horton           21 Male   Afri… <NA>           1/1/2000        
+    ## 2       25748 Phillip A. Blurbridge    19 Male   Afri… <NA>           1/1/2000        
+    ## 3       25746 Samuel H. Knapp          17 Male   Euro… <NA>           1/1/2000        
+    ## 4       25749 Mark Ortiz               23 Male   Hisp… <NA>           1/1/2000        
+    ## 5           1 LaTanya Janelle McCoy    24 Female Afri… <NA>           1/2/2000        
+    ## 6           2 Lester Miller            53 Male   Race… <NA>           1/2/2000        
+    ## # … with 20 more variables: Location of injury (address) <chr>,
+    ## #   Location of death (city) <chr>, State <chr>,
+    ## #   Location of death (zip code) <dbl>, Location of death (county) <chr>,
+    ## #   Full Address <chr>, Latitude <dbl>, Longitude <dbl>,
+    ## #   Agency or agencies involved <chr>, Highest level of force <chr>,
+    ## #   Alleged weapon <chr>, Aggressive physical movement <chr>,
+    ## #   Fleeing/Not fleeing <chr>, Description Temp <chr>, URL Temp <lgl>, …
 
 ## Presentation
 
