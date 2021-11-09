@@ -24,6 +24,8 @@ library(tidyverse)
 Innocent_Deaths_caused_by_Police_All_time_ <- read_csv("data/Innocent Deaths caused by Police (All time).csv")
 head(Innocent_Deaths_caused_by_Police_All_time_)
 
+glimpse(head(Innocent_Deaths_caused_by_Police_All_time_))
+
 
 ```
 
