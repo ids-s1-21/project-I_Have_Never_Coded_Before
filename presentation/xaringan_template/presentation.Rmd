@@ -41,7 +41,7 @@ style_xaringan(
 
 class: center, middle
 
-## A statement of the overall goal / research question
+To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
 
 ---
 
