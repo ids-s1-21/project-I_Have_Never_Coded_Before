@@ -31,6 +31,10 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r load-data, include=FALSE}
 # Load your data here
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+head(police_data)
+
+glimpse(head(police_data))
 ```
 
 ```{r include=FALSE}
