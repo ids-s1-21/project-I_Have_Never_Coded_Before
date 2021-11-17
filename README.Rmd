@@ -26,6 +26,12 @@ head(Innocent_Deaths_caused_by_Police_All_time_)
 
 glimpse(head(Innocent_Deaths_caused_by_Police_All_time_))
 
+Innocent_Deaths_caused_by_Police_All_time_ %>% 
+  group_by(Age) %>% 
+  ggplot(aes(x = Age)) +
+  geom_histogram()
+
+
 
 ```
 

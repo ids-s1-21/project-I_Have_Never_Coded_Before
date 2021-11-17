@@ -18,6 +18,7 @@ The variables that we are going to be using is going to be every single one exce
 
 ## 2. Data
 
+glimpse(head(Innocent_Deaths_caused_by_Police_All_time_))
 
 
 ## 3. Data analysis plan
@@ -25,5 +26,16 @@ Main hypothesis is whether there is a link between dying by the police and being
 A comparison group could be any of the following or all the following categories, aggressive physical movement, alleged weapon, fleeing / not fleeing.
 Side hypothesis' could include: whether there is a link between race and being killed by the police, whether there is a link to age and being killed by the police, whether there is a link between what state you are in and being killed by the police, whether there is a link between mental health and being killed by the police.
 The percentage of innocent people who died out of all the people who died, could be a useful indicator, bar chart with variables fleeing and not fleeing, graph showing out of the people who died if they had a weapon what weapon they had, whether an aggressive physical movement increases your chances of being killed, out of the innocent people who died what were they killed by may be a difference between being shot and killed in a police pursuit. Out of the people who we put in our "innocent" group how many of the cases had dispositions or exclusions.
+
+```{r data}
+deaths <- read_csv("data/Innocent Deaths caused by Police (All time).csv")
+Innocent_Deaths_caused_by_Police_All_time_ %>% 
+  group_by(Age) %>% 
+  ggplot(aes(x = Age)) +
+  geom_histogram()
+```
+
+Data is right skewed, shows the most likely age to die from the police is between 25 and 35. There also appears to be a data point below the age of zero which highly unlikely. So in the project we will filter that out.
+
 
 

@@ -31,6 +31,8 @@ total to work with.
 
 ## 2. Data
 
+glimpse(head(Innocent\_Deaths\_caused\_by\_Police\_All\_time\_))
+
 ## 3. Data analysis plan
 
 Main hypothesis is whether there is a link between dying by the police
@@ -53,3 +55,15 @@ chances of being killed, out of the innocent people who died what were
 they killed by may be a difference between being shot and killed in a
 police pursuit. Out of the people who we put in our “innocent” group how
 many of the cases had dispositions or exclusions.
+
+``` data_visualisation
+Innocent_Deaths_caused_by_Police_All_time_ %>% 
+  group_by(Age) %>% 
+  ggplot(aes(x = Age)) +
+  geom_histogram()
+```
+
+Data is right skewed, shows the most likely age to die from the police
+is between 25 and 35. There also appears to be a data point below the
+age of zero which highly unlikely. So in the project we will filter that
+out.
