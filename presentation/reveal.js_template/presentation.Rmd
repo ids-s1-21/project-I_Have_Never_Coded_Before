@@ -25,7 +25,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
+
 ```
 
 To see if their is a correlation between being killed by the police and being innocent.

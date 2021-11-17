@@ -7,6 +7,7 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(here)
 ```
 
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
@@ -17,6 +18,15 @@ Our general research question: Is their a link between dying by the police and b
 The variables that we are going to be using is going to be every single one except for the URL of image, location of injury (address), location zip code, full address, URL Temp, Brief Description, Supporting Document Link, Longitude, and Latitude. This would mean we have 18 variables in total to work with.
 
 ## 2. Data
+```{r load-data, echo = FALSE}
+
+library(tidyverse)
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+head(police_data)
+
+glimpse(head(police_data))
+
+```
 
 glimpse(head(Innocent_Deaths_caused_by_Police_All_time_))
 
