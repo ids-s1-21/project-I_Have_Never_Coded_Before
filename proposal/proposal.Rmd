@@ -21,10 +21,10 @@ The variables that we are going to be using is going to be every single one exce
 ```{r load-data, echo = FALSE}
 
 library(tidyverse)
-Innocent_Deaths_caused_by_Police_All_time_ <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
-head(Innocent_Deaths_caused_by_Police_All_time_)
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+head(police_data)
 
-glimpse(head(Innocent_Deaths_caused_by_Police_All_time_))
+glimpse(head(police_data))
 
 ```
 
