@@ -1,1 +1,16 @@
-In this folder is two versions of the starter presentation that you can use to build your own project presentation. Once you have chosen which you wish to use as a template, please move or copy the contents into this folder.
+---
+title: "Presentation title"
+subtitle: "Presentation subtitle (if any)"
+author: "Team name <br> Names of team members"
+institute: "University of Edinburgh"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
