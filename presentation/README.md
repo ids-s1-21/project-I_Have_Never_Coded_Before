@@ -1,7 +1,7 @@
 ---
-title: "Presentation title"
+title: "Innocent Death's caused by Police Project"
 subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
+author: "I Have Never Coded Before <br> Abhey Reuben Mieke"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
