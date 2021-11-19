@@ -36,6 +36,10 @@ police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).c
 head(police_data)
 
 glimpse(head(police_data))
+
+police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, loi_address = `Location of injury (address)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, description_temp = `Description Temp`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`)
+
+#doi = date of injury resulting in death, loi= location of injury resulting in death, lod = location of death, hlof = highest level of force, iuof = intended use of force
 ```
 
 ```{r include=FALSE}
