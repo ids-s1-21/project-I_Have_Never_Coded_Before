@@ -41,7 +41,7 @@ police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = A
 
 #doi = date of injury resulting in death, loi= location of injury resulting in death, lod = location of death, hlof = highest level of force, iuof = intended use of force
 
-police_data <- subset(police_data, select = -c(6,26))
+police_data <- subset(police_data, select = -c(6, 8, 13, 22, 23, 26))
 police_data
 ```
 
