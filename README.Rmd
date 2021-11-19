@@ -1,6 +1,6 @@
 ---
 title: Innocent Death's caused by Police Project
-author: by I Have Never Coded Before
+author: by Abhey , Reuben , Mieke
 output: github_document
 ---
 

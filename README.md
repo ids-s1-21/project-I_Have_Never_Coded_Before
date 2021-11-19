@@ -1,6 +1,6 @@
 Innocent Death’s caused by Police Project
 ================
-by I Have Never Coded Before
+by Abhey , Reuben , Mieke
 
 ## Summary
 
@@ -25,7 +25,7 @@ your project.
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
     ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
+    ## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
     ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
     ## ✓ readr   2.0.0     ✓ forcats 0.5.1
 
@@ -48,14 +48,14 @@ your project.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
     ## # A tibble: 6 × 27
-    ##   `Unique ID` Name                    Age Gender Race  `URL of image` `Date of injury…
-    ##         <dbl> <chr>                 <dbl> <chr>  <chr> <chr>          <chr>           
-    ## 1       25747 Mark A. Horton           21 Male   Afri… <NA>           1/1/2000        
-    ## 2       25748 Phillip A. Blurbridge    19 Male   Afri… <NA>           1/1/2000        
-    ## 3       25746 Samuel H. Knapp          17 Male   Euro… <NA>           1/1/2000        
-    ## 4       25749 Mark Ortiz               23 Male   Hisp… <NA>           1/1/2000        
-    ## 5           1 LaTanya Janelle McCoy    24 Female Afri… <NA>           1/2/2000        
-    ## 6           2 Lester Miller            53 Male   Race… <NA>           1/2/2000        
+    ##   `Unique ID` Name       Age Gender Race    `URL of image` `Date of injury resu…
+    ##         <dbl> <chr>    <dbl> <chr>  <chr>   <chr>          <chr>                
+    ## 1       25747 Mark A.…    21 Male   Africa… <NA>           1/1/2000             
+    ## 2       25748 Phillip…    19 Male   Africa… <NA>           1/1/2000             
+    ## 3       25746 Samuel …    17 Male   Europe… <NA>           1/1/2000             
+    ## 4       25749 Mark Or…    23 Male   Hispan… <NA>           1/1/2000             
+    ## 5           1 LaTanya…    24 Female Africa… <NA>           1/2/2000             
+    ## 6           2 Lester …    53 Male   Race u… <NA>           1/2/2000             
     ## # … with 20 more variables: Location of injury (address) <chr>,
     ## #   Location of death (city) <chr>, State <chr>,
     ## #   Location of death (zip code) <dbl>, Location of death (county) <chr>,
@@ -93,6 +93,12 @@ your project.
     ## $ `Intended use of force (Developing)`                     <chr> "Pursuit", "P…
     ## $ `Supporting document link`                               <chr> "https://driv…
     ## $ `Foreknowledge of mental illness`                        <chr> "No", "No", "…
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 1174 rows containing non-finite values (stat_bin).
+
+![](README_files/figure-gfm/load-data-1.png)<!-- -->
 
 ## Presentation
 
