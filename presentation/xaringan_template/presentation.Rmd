@@ -127,17 +127,35 @@ glance(model)
 ```{r recode-species, echo = FALSE}
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
 # in my slides. But I need the resulting data frame for a plot I want to present.
-iris_modified <- iris %>%
-  mutate(Species = fct_other(Species, keep = "setosa"))
+#iris_modified <- iris %>%
+  #mutate(Species = fct_other(Species, keep = "setosa"))
 ```
 
 ```{r plot-iris, echo = FALSE}
 # Code hidden with echo = FALSE
 # Uses modified iris dataset from previous chunk
 # Play around with height and width until you're happy with the look
-ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
-  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+#ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+ # geom_point() + 
+  #theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+
+#k + geom_map(aes(map_id = state), map = map) + expand_limits(x = map$long, y = map$lat)
+#map_id, alpha, color, fill, linetype, size
+states <- map_data("state")
+arrests <- USArrests
+names(arrests) <- tolower(names(arrests))
+arrests$region <- tolower(rownames(USArrests))
+
+choro <- merge(states, arrests, sort = FALSE, by = "region")
+choro <- choro[order(choro$order), ]
+ggplot(choro, aes(long, lat)) +
+  geom_polygon(aes(group = group, fill = assault)) +
+  coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
+
+ggplot(choro, aes(long, lat)) +
+geom_polygon(aes(group = group, fill = assault / murder)) +
+coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
+#Code from https://ggplot2.tidyverse.org/reference/map_data.html
 ```
 
 ---
