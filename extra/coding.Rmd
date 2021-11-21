@@ -40,7 +40,9 @@ test_data <- testing(police_split)
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+#murder, time, race data 
+
+police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% group_by(year,race) %>% count(year) %>% ggplot(police_data, aes(x = year, fill = race)) + geom_histogra()
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
