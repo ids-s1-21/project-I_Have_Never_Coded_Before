@@ -128,9 +128,9 @@ glance(model)
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
 # in my slides. But I need the resulting data frame for a plot I want to present.
 #iris_modified <- iris %>%
-police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% group_by(year,race) %>% count(year)
+police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% group_by(year,race) %>% count(year) 
 
-ggplot() + geom_bar(police_time_race, mapping = aes(x = year, fill = race)) + facet() 
+ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + facet_wrap(~ race, nrow = 4) 
 ```
 
 ```{r plot-iris, echo = FALSE}
