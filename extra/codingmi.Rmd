@@ -1,17 +1,7 @@
 ---
-title: "coding"
+title: "codingmi"
 output: html_document
 ---
-
-```{r load-packages, include = FALSE}
-# Add any additional packages you need to this chunk
-library(tidyverse)
-library(tidymodels)
-library(palmerpenguins)
-library(knitr)
-library(xaringanthemer)
-library(here)
-```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -24,15 +14,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
-head(police_data)
-
-glimpse(head(police_data))
-set.seed(32)
-police_split <- initial_split(police_data, prop = 0.8)
-train_data <- training(police_split)
-test_data <- testing(police_split)
-
+summary(cars)
 ```
 
 ## Including Plots
@@ -40,13 +22,7 @@ test_data <- testing(police_split)
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-#murder, time, race data 
-
-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% group_by(year,race) %>% count(year) %>% ggplot(police_data, aes(x = year, fill = race)) + geom_histogra()
+plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-```{r race, echo=FALSE}
-
-```
