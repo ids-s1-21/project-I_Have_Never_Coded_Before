@@ -38,8 +38,8 @@ Side hypothesis' could include: whether there is a link between race and being k
 The percentage of innocent people who died out of all the people who died, could be a useful indicator, bar chart with variables fleeing and not fleeing, graph showing out of the people who died if they had a weapon what weapon they had, whether an aggressive physical movement increases your chances of being killed, out of the innocent people who died what were they killed by may be a difference between being shot and killed in a police pursuit. Out of the people who we put in our "innocent" group how many of the cases had dispositions or exclusions.
 
 ```{r data}
-deaths <- read_csv("data/Innocent Deaths caused by Police (All time).csv")
-Innocent_Deaths_caused_by_Police_All_time_ %>% 
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+police_data %>% 
   group_by(Age) %>% 
   ggplot(aes(x = Age)) +
   geom_histogram()
