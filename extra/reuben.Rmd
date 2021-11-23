@@ -37,7 +37,7 @@ test_data <- testing(police_split)
 ## Including Plots
 
 You can also embed plots, for example:
-```{r linear_regression}
+```{r data}
 police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
 head(police_data)
 police_data <- subset(police_data, select = -c(6, 8, 13, 21, 22, 23, 26))
@@ -49,6 +49,34 @@ ggplot(police_data1,
   geom_histogram() + 
   scale_y_log10()
 ```
+```{r linear_regression}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(age ~ race, data = police_data) %>%
+  tidy()
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(age ~ agressive_movement, data = police_data) %>%
+  tidy()
+```
+For each additional year they are older, certain races have a different chance of dying by the police. In this scenario on average African-American/Black average age when killed by the police is 31 years old. On average if an Asian/Pacific Islander dies from the police they are on average 3 years older than an African-American/Black. The rest can be seen, all in comparison to African-American/Black
+
+
+```{r u16}
+police_data1 
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(age ~ state, data = police_data1) %>%
+  tidy() 
+```
+
+```{r innocent}
+#create a histogram with frequency and alleged weapon
+
+```
+
+
 ```{r pressure, echo=FALSE}
 plot(pressure)
 ```
