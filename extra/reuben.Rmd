@@ -59,9 +59,62 @@ linear_reg() %>%
   set_engine("lm") %>%
   fit(age ~ agressive_movement, data = police_data) %>%
   tidy()
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(age ~ gender, data = police_data) %>%
+  tidy()
 ```
 For each additional year they are older, certain races have a different chance of dying by the police. In this scenario on average African-American/Black average age when killed by the police is 31 years old. On average if an Asian/Pacific Islander dies from the police they are on average 3 years older than an African-American/Black. The rest can be seen, all in comparison to African-American/Black
 
+```{r race_zip}
+#police_race_zip <- police_data %>%
+ # mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
+  #group_by(race, firstzip, year)
+
+#ggplot(police_race_zip,
+ #      aes(x = race),
+  #     y = zip,
+   #    colour = race)
+```
+
+```{r zip_code_data}
+police_zip <- police_data %>%
+  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
+   mutate(year = str_sub(doi,-4,-1)) %>%
+  group_by(firstzip, year) %>%
+  count(year)
+      
+ggplot(police_zip,
+       aes(x = year,
+           y = n,
+           colour = firstzip)) +
+  geom_point() +
+  facet_wrap(~ firstzip)
+
+```
+zip code zone picture
+[https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM]
+information from [https://en.wikipedia.org/wiki/ZIP_Code#Primary_state_prefixes]
+The first digit of the zip code is allocated as follows:
+0 = Connecticut (CT), Massachusetts (MA), Maine (ME), New Hampshire (NH), New Jersey (NJ), New York (NY, Fishers Island only), Puerto Rico (PR), Rhode Island (RI), Vermont (VT), Virgin Islands (VI)
+1 = Delaware (DE), New York (NY), Pennsylvania (PA)
+2 = District of Columbia (DC), Maryland (MD), North Carolina (NC), South Carolina (SC), Virginia (VA), West Virginia (WV)
+3 = Alabama (AL), Florida (FL), Georgia (GA), Mississippi (MS), Tennessee (TN), Army Post Office Americas (APO AA), Fleet Post Office Americas (FPO AA)
+4 = Indiana (IN), Kentucky (KY), Michigan (MI), Ohio (OH)
+5 = Iowa (IA), Minnesota (MN), Montana (MT), North Dakota (ND), South Dakota (SD), Wisconsin (WI)
+6 = Illinois (IL), Kansas (KS), Missouri (MO), Nebraska (NE)
+7 = Arkansas (AR), Louisiana (LA), Oklahoma (OK), Texas (TX)
+8 = Arizona (AZ), Colorado (CO), Idaho (ID), New Mexico (NM), Nevada (NV), Utah (UT), Wyoming (WY)
+9 = Alaska (AK), American Samoa (AS), California (CA), Guam (GU), Hawaii (HI), Marshall Islands (MH), Federated States of Micronesia (FM), Northern Mariana Islands (MP), Oregon (OR), Palau (PW), Washington (WA)
+
+```{r zip_code_regression}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(n ~ firstzip, data = police_zip) %>%
+  tidy() %>%
+  glimpse()
+```
 
 ```{r u16}
 police_data1 
