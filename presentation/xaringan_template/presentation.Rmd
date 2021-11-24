@@ -137,6 +137,16 @@ police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>%
   ) %>% group_by(year,race) %>% count(year) 
 
 ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + facet_wrap(~ race, nrow = 4) + labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45))
+
+#https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
+
+police_time_race_proportion = police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(
+    race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race
+    )
+  ) %>% select(year == 2000)
 ```
 
 ```{r plot-iris, echo = FALSE}
@@ -179,9 +189,15 @@ coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
 ```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
 # see how I changed out.width and fig.width from defaults
 # to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
+police_time_race_proportion <- police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(
+    race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race
+    )
+  ) %>% filter(year == 2000) 
+
+
 ```
 ]
 
@@ -192,7 +208,13 @@ ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
 If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
 
 ```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
+police_time_race_proportion <- police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(
+    race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race
+    )
+  ) %>% filter(year == 2000) 
 ```
 
 ---
