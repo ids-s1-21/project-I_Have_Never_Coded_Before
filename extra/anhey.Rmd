@@ -32,8 +32,10 @@ police_data <- subset(police_data, select = -c(6, 8, 13, 21, 22, 23, 26))
 police_data1 <- police_data %>%
   filter(age < 18)
 
-police_data <- police_data %>%
-  filter(alleged_weapon == "None" && agressive_movement == "None" && fleeing_not_fleeing == "Not fleeing")
+police_data_innocent <- police_data %>%
+  filter(alleged_weapon == "None") %>%
+  filter(agressive_movement == "None") %>%
+  filter(fleeing_not_fleeing == "Not fleeing")
 ```
 ## R Markdown
 
