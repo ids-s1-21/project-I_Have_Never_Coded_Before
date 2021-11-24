@@ -93,6 +93,7 @@ ggplot(police_zip,
   facet_wrap(~ firstzip)
 
 ```
+We can see the general trend is increasing up till recently, this may be becuase of corona virus. However these results are interesting because (look up populations of the different numbers because they all look quite similar, so data on populations can be revealing)
 zip code zone picture
 [https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM]
 information from [https://en.wikipedia.org/wiki/ZIP_Code#Primary_state_prefixes]
@@ -109,11 +110,15 @@ The first digit of the zip code is allocated as follows:
 9 = Alaska (AK), American Samoa (AS), California (CA), Guam (GU), Hawaii (HI), Marshall Islands (MH), Federated States of Micronesia (FM), Northern Mariana Islands (MP), Oregon (OR), Palau (PW), Washington (WA)
 
 ```{r zip_code_regression}
+police_zip_reg <- police_data %>%
+  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
+   mutate(year = str_sub(doi,-4,-1)) %>%
+  group_by(firstzip) 
+
 linear_reg() %>%
   set_engine("lm") %>%
-  fit(n ~ firstzip, data = police_zip) %>%
-  tidy() %>%
-  glimpse()
+  fit(year ~ firstzip, data = police_zip_reg) %>%
+  tidy()
 ```
 
 ```{r u16}
