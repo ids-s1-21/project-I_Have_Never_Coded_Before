@@ -32,9 +32,6 @@ total to work with.
 
 ## 2. Data
 
-<<<<<<< HEAD
-glimpse(head(Innocent\_Deaths\_caused\_by\_Police\_All\_time\_))
-=======
     ## Warning: One or more parsing issues, see `problems()` for details
 
     ## Rows: 30860 Columns: 27
@@ -95,7 +92,8 @@ glimpse(head(Innocent\_Deaths\_caused\_by\_Police\_All\_time\_))
     ## $ `Intended use of force (Developing)`                     <chr> "Pursuit", "P…
     ## $ `Supporting document link`                               <chr> "https://driv…
     ## $ `Foreknowledge of mental illness`                        <chr> "No", "No", "…
->>>>>>> 58e0625343d405dad80dc6302365229af6ecd355
+
+glimpse(head(Innocent_Deaths_caused_by_Police_All_time\_))
 
 ## 3. Data analysis plan
 
@@ -120,12 +118,36 @@ they killed by may be a difference between being shot and killed in a
 police pursuit. Out of the people who we put in our “innocent” group how
 many of the cases had dispositions or exclusions.
 
-``` data_visualisation
-Innocent_Deaths_caused_by_Police_All_time_ %>% 
+``` r
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+```
+
+    ## Warning: One or more parsing issues, see `problems()` for details
+
+    ## Rows: 30860 Columns: 27
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (21): Name, Gender, Race, URL of image, Date of injury resulting in deat...
+    ## dbl  (5): Unique ID, Age, Location of death (zip code), Latitude, Longitude
+    ## lgl  (1): URL Temp
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+police_data %>% 
   group_by(Age) %>% 
   ggplot(aes(x = Age)) +
   geom_histogram()
 ```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 1174 rows containing non-finite values (stat_bin).
+
+![](proposal_files/figure-gfm/data-1.png)<!-- -->
 
 Data is right skewed, shows the most likely age to die from the police
 is between 25 and 35. There also appears to be a data point below the

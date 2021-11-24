@@ -39,15 +39,22 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-police_state_race <-police_data %>% group_by(state,race) %>% count(state)
+police_state_race <- police_data %>% 
+  mutate(
+    race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race
+    )
+  )
+
+police_state_race <- police_state_race %>% group_by(state,race) %>% count(state)
 
 police_state_race %>%
-  ggplot(aes(x = state, y = n)) +
+  ggplot(aes(x = state, y = n, color = race)) +
   geom_col() +
   facet_wrap(~ race, nrow = 4)
 
-#police_state_race %>%
-  #ggplot(x = state, )
+
 ```
 
 ## Including Plots
