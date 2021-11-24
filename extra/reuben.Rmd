@@ -109,6 +109,17 @@ The first digit of the zip code is allocated as follows:
 8 = Arizona (AZ), Colorado (CO), Idaho (ID), New Mexico (NM), Nevada (NV), Utah (UT), Wyoming (WY)
 9 = Alaska (AK), American Samoa (AS), California (CA), Guam (GU), Hawaii (HI), Marshall Islands (MH), Federated States of Micronesia (FM), Northern Mariana Islands (MP), Oregon (OR), Palau (PW), Washington (WA)
 
+---
+
+
+```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics("https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM")
+```
+
+background-image: url(https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM)
+
+---
+
 ```{r zip_code_regression}
 police_zip_reg <- police_data %>%
   mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%

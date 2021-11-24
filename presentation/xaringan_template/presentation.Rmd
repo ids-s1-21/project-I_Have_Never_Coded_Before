@@ -263,3 +263,14 @@ Limitations:
 `xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
 
 - And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+
+---
+
+background-image: url(https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM)
+
+---
+
+
+```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics("https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM")
+```
