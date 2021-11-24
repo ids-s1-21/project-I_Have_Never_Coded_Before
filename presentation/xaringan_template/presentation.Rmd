@@ -140,13 +140,7 @@ ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race
 
 #https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 
-police_time_race_proportion = police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
-  mutate(
-    race = case_when(
-      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
-      TRUE ~ race
-    )
-  ) %>% select(year == 2000)
+
 ```
 
 ```{r plot-iris, echo = FALSE}
@@ -208,13 +202,37 @@ police_time_race_proportion <- police_data %>% mutate(year = str_sub(doi,-4,-1))
 If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
 
 ```{r iris-table, echo = FALSE}
-police_time_race_proportion <- police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
+police_time_race_proportion <- police_data %>% 
+  mutate(year = str_sub(doi,-4,-1)) %>% 
   mutate(
     race = case_when(
       name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
       TRUE ~ race
     )
-  ) %>% filter(year == 2000) 
+  ) %>% 
+  filter(year == 2000 | year == 2010 | year == 2019) %>% filter(race == "African-American/Black" | race == "Asian/Pacific Islander" | race == "European-American/White" | race == 	
+"Hispanic/Latino"  | race == 	
+"Native American/Alaskan") %>% 
+  group_by(year,race)  %>% 
+  count(year) %>% 
+  mutate(n = case_when(
+      year == 2000 & n == 125 ~ 125/34658190,
+      year == 2000 & n == 12 ~ 12/10641833,
+      year == 2000 & n == 123 ~ 123/211460626,
+      year == 2000 & n == 57 ~ 57/35305818,
+      year == 2000 & n == 13 ~ 13/2475956,
+      year == 2010 & n == 295 ~ 295/38929319,
+      year == 2010 & n == 18 ~ 22/15214265,
+      year == 2010 & n == 449 ~ 449/223553265,
+      year == 2010 & n == 156 ~ 156/ 50477594,
+      year == 2010 & n == 13 ~ 13/ 2932248,
+      year == 2019 & n == 450 ~ 439/43984096,
+      year == 2019 & n == 40 ~ 40/20022610,
+      year == 2019 & n == 669 ~ 669/197271953,
+      year == 2019 & n == 249 ~ 249/60724311,
+      year == 2019 & n == 17 ~ 17/4267113))
+    
+  #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, calculations rounded down for 2019 as you cannot get a fraction of a person
 ```
 
 ---
