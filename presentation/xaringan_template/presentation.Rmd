@@ -48,7 +48,7 @@ police_data1 <- police_data %>%
 
 ```
 
-```{r include=FALSE}
+```{r no, include=FALSE}
 style_xaringan(
   title_slide_background_image = "img/confetti.jpg"
 )
@@ -240,11 +240,30 @@ ggplot() + geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, 
   #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
 ```
 
+```{r innocent_state}
+police_data_innocent <- police_data %>%
+  filter(alleged_weapon == "None" | is.na(alleged_weapon))  %>%
+  filter(agressive_movement == "None" | is.na(agressive_movement)) %>%
+  filter(fleeing_not_fleeing == "Not fleeing" | is.na(fleeing_not_fleeing))  %>%
+  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>% 
+   mutate(year = str_sub(doi,-4,-1)) %>%
+  group_by(firstzip, year)
+
+ggplot(police_data_innocent,
+       aes(x = year,
+           y = ,
+          colour = race )) +
+  geom_point()
+
+
+
+```
+
 ---
 
 # Images
 
-```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+```{r wow, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
 include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
 ```
 

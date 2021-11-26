@@ -67,6 +67,19 @@ linear_reg() %>%
 ```
 For each additional year they are older, certain races have a different chance of dying by the police. In this scenario on average African-American/Black average age when killed by the police is 31 years old. On average if an Asian/Pacific Islander dies from the police they are on average 3 years older than an African-American/Black. The rest can be seen, all in comparison to African-American/Black
 
+```{r under_18_innocent}
+
+# filter(police_data_innocent, age<18) 
+
+
+140/1350   # 10% when all are none
+1440-140
+
+
+1020/1440
+```
+
+
 ```{r race_zip}
 #police_race_zip <- police_data %>%
  # mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
@@ -128,7 +141,7 @@ police_zip_reg <- police_data %>%
 
 linear_reg() %>%
   set_engine("lm") %>%
-  fit(year ~ firstzip, data = police_zip_reg) %>%
+  fit(age ~ race, data = police_data_innocent) %>%
   tidy()
 ```
 
