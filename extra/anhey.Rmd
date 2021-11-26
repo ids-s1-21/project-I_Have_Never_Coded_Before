@@ -40,6 +40,13 @@ police_data <- police_data %>%
     )
   )
 
+police_data_new <- police_data %>%
+  mutate(
+    innocent/not_innocent = case_when(
+      
+    )
+  )
+
 police_data_innocent <- police_data %>%
   filter(alleged_weapon == "None" | is.na(alleged_weapon))  %>%
   filter(agressive_movement == "None" | is.na(agressive_movement)) %>%
@@ -57,7 +64,7 @@ police_state_race <- police_data_innocent %>% group_by(state,race) %>% count(sta
 police_state_race %>%
   ggplot(aes(x = state, y = n, color = race)) +
   geom_col() 
-  facet_wrap(~ race, nrow = 4)
+  facet_wrap(~ race)
 ```
 
 ## Including Plots
@@ -69,3 +76,12 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r innocent_state}
+police_data_innocent_ss1 <- police_data_innocent %>%
+  group_by(race) %>%
+  count(race) %>%
+  arrange(desc(n))
+
+police_data_innocent_ss1
+```
