@@ -23,6 +23,7 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(here)
+library(usdata)
 ```
 
 ```{r setup, include=FALSE}
@@ -37,7 +38,7 @@ head(police_data)
 
 glimpse(head(police_data))
 
-police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, loi_address = `Location of injury (address)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, description_temp = `Description Temp`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`)
+police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, loi_address = `Location of injury (address)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, description_temp = `Description Temp`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`) %>% mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% mutate(year = str_sub(doi,-4,-1))
 
 #doi = date of injury resulting in death, loi= location of injury resulting in death, lod = location of death, hlof = highest level of force, iuof = intended use of force
 
@@ -128,8 +129,8 @@ glance(model)
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
 # in my slides. But I need the resulting data frame for a plot I want to present.
 #iris_modified <- iris %>%
-police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
-  mutate(
+police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1))
+
     race = case_when(
       name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
       TRUE ~ race
@@ -153,6 +154,8 @@ ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race
 
 #k + geom_map(aes(map_id = state), map = map) + expand_limits(x = map$long, y = map$lat)
 #map_id, alpha, color, fill, linetype, size
+
+police_data %>% 
 states <- map_data("state")
 police <- 
 arrests <- USArrests
