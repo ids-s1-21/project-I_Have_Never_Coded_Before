@@ -141,7 +141,7 @@ police_zip_reg <- police_data %>%
 
 linear_reg() %>%
   set_engine("lm") %>%
-  fit(age ~ ., data = police_zip_reg) %>%
+  fit(age ~ race, data = police_data_innocent) %>%
   tidy()
 ```
 
