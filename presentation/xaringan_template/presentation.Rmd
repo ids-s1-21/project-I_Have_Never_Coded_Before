@@ -47,7 +47,7 @@ police_data1 <- police_data %>%
 
 ```
 
-```{r include=FALSE}
+```{r no, include=FALSE}
 style_xaringan(
   title_slide_background_image = "img/confetti.jpg"
 )
@@ -199,7 +199,7 @@ kable(head(iris), format = "html")
 
 # Images
 
-```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+```{r wow, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
 include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
 ```
 
