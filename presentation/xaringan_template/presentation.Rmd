@@ -153,7 +153,62 @@ ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race
 #k + geom_map(aes(map_id = state), map = map) + expand_limits(x = map$long, y = map$lat)
 #map_id, alpha, color, fill, linetype, size
 
-police_data_hm <- police_data %>% filter(year == 2019) %>% count(state)
+police_data_hm <- police_data %>% 
+  filter(year == 2019) %>% 
+  count(state) %>% 
+  mutate(n = case_when(
+    state == "California" ~ 212/(330150668*0.1196),
+    state == "Texas" ~ 178/(330150668*0.0868),
+    state == "Florida" ~ 129/(330150668*0.0644),
+    state == "New York" ~ c(n)/(330150668*0.0591),
+    state == "Pennsylvania" ~ c(n)/(330150668*0.0387),
+    state == "Illinois" ~ c(n)/(330150668*0.0385),
+    state == "Ohio" ~ c(n)/(330150668*0.0353),
+    state == "Georgia" ~ c(n)/(330150668*0.0318),
+    state == "North Carolina" ~ c(n)/(330150668*0.0314),
+    state == "Michigan" ~ c(n)/(330150668*0.0302),
+    state == "New Jersey" ~ c(n)/(330150668*0.0269),
+    state == "Virginia" ~ c(n)/(330150668*0.0258),
+    state == "Washington" ~ c(n)/(330150668*0.0228),
+    state == "Arizona" ~ c(n)/(330150668*0.0217),
+    state == "Massachusetts" ~ c(n)/(330150668*0.0209),
+    state == "Tennessee" ~ c(n)/(330150668*0.0205),
+    state == "Indiana" ~ c(n)/(330150668*0.0202),
+    state == "Missouri" ~ c(n)/(330150668*0.0185),
+    state == "Maryland" ~ c(n)/(330150668*0.0183),
+    state == "Wisconsin" ~ c(n)/(330150668*0.0176),
+    state == "Colorado" ~ c(n)/(330150668*0.0172),
+    state == "Minnesota" ~ c(n)/(330150668*0.0170),
+    state == "South Carolina" ~ c(n)/(330150668*0.0154),
+    state == "Alabama" ~ c(n)/(330150668*0.0148),
+    state == "Louisiana" ~ c(n)/(330150668*0.0141),
+    state == "Kentucky" ~ c(n)/(330150668*0.0135),
+    state == "Oregon" ~ c(n)/(330150668*0.0127),
+    state == "Oklahoma" ~ c(n)/(330150668*0.0119),
+    state == "Connecticut" ~ c(n)/(330150668*0.0108),
+    state == "Utah" ~ c(n)/(330150668*0.0096),
+    state == "Iowa" ~ c(n)/(330150668*0.0095),
+    state == "Nevada" ~ c(n)/(330150668*0.0092),
+    state == "Arkansas" ~ c(n)/(330150668*0.0091),
+    state == "Mississippi" ~ c(n)/(330150668*0.0090),
+    state == "Kansas" ~ c(n)/(330150668*0.0088),
+    state == "New Mexico" ~ c(n)/(330150668*0.0063),
+    state == "Nebraska" ~ c(n)/(330150668*0.0058),
+    state == "Idaho" ~ c(n)/(330150668*0.0053),
+    state == "West Virginia" ~ c(n)/(330150668*0.0055),
+    state == "Hawaii" ~ c(n)/(330150668*0.0043),
+    state == "New Hampshire" ~ c(n)/(330150668*0.0041),
+    state == "Maine" ~ c(n)/(330150668*0.0040),
+    state == "Montana" ~ c(n)/(330150668*0.0032),
+    state == "Rhode Island" ~ c(n)/(330150668*0.0032),
+    state == "Delaware" ~ c(n)/(330150668*0.0029),
+    state == "South Dakota" ~ c(n)/(330150668*0.0027),
+    state == "North Dakota" ~ c(n)/(330150668*0.0023),
+    state == "Alaska" ~ c(n)/(330150668*0.0022),
+    state == "Vermont" ~ c(n)/(330150668*0.0019),
+    state == "Wyoming" ~ c(n)/(330150668*0.0017))) %>%
+  arrange(desc(n))
+    
 states <- map_data("state")
 police <- police_data_hm
 names(police) <- tolower(names(police))
@@ -162,8 +217,12 @@ police$state <- tolower(police_data_hm$state)
 choro <- merge(states, police, sort = FALSE, by.x = 'region', by.y = "state")
 choro <- choro[order(choro$order), ]
 ggplot(choro, aes(long, lat)) +
-  geom_polygon(aes(group = group, fill = n)) +
-  coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
+  geom_polygon(aes(group = group, fill = n)) + 
+  labs(fill = "Prop. of Deaths by State Pop.") + 
+  theme_minimal() 
+
+  coord_map("albers",  lat0 = 45.5, lat1 = 29.5) 
+  
 
 #ggplot(choro, aes(long, lat)) +
 #geom_polygon(aes(group = group, fill = assault / murder)) +
