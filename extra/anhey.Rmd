@@ -40,13 +40,6 @@ police_data <- police_data %>%
     )
   )
 
-police_data_new <- police_data %>%
-  mutate(
-    innocent/not_innocent = case_when(
-      
-    )
-  )
-
 police_data_innocent <- police_data %>%
   filter(alleged_weapon == "None" | is.na(alleged_weapon))  %>%
   filter(agressive_movement == "None" | is.na(agressive_movement)) %>%
@@ -63,7 +56,7 @@ police_state_race <- police_data_innocent %>% group_by(state,race) %>% count(sta
 
 police_state_race %>%
   ggplot(aes(x = state, y = n, color = race)) +
-  geom_col() 
+  geom_col() +
   facet_wrap(~ race)
 ```
 
