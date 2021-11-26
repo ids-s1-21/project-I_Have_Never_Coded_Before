@@ -15,6 +15,7 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(here)
+library(plotly)
 ```
 
 ```{r load-data, include=FALSE}
@@ -55,7 +56,7 @@ When you click the **Knit** button a document will be generated that includes bo
 police_state_race <- police_data_innocent %>% group_by(state,race) %>% count(state)
 
 police_state_race %>%
-  ggplot(aes(x = state, y = n, color = race)) +
+  ggplot(aes(x = state, y = n, fill = race)) +
   geom_col() +
   facet_wrap(~ race)
 ```
@@ -78,3 +79,18 @@ police_data_innocent_ss1 <- police_data_innocent %>%
 
 police_data_innocent_ss1
 ```
+
+```{r linear-reg}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(age ~ mental_illness, data = police_data) %>%
+  tidy()
+
+ggplot(data = police_data_innocent, aes(x = ))
+```
+
+```{r 3d}
+plot_ly(x=police_data_innocent$longitude, y=police_data_innocent$latitude, z=police_data_innocent$age, type="scatter3d", mode="markers", color=police_data_innocent$race)
+```
+
+
