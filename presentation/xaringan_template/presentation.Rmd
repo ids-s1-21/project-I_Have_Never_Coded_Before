@@ -129,9 +129,7 @@ glance(model)
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
 # in my slides. But I need the resulting data frame for a plot I want to present.
 #iris_modified <- iris %>%
-police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1))
-
-    race = case_when(
+police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% mutate(race = case_when(
       name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
       TRUE ~ race
     )
@@ -155,22 +153,21 @@ ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race
 #k + geom_map(aes(map_id = state), map = map) + expand_limits(x = map$long, y = map$lat)
 #map_id, alpha, color, fill, linetype, size
 
-police_data %>% 
+police_data_hm <- police_data %>% filter(year == 2019) %>% count(state)
 states <- map_data("state")
-police <- 
-arrests <- USArrests
-names(arrests) <- tolower(names(arrests))
-arrests$region <- tolower(rownames(USArrests))
+police <- police_data_hm
+names(police) <- tolower(names(police))
+police$state <- tolower(police_data_hm$state)
 
-choro <- merge(states, arrests, sort = FALSE, by = "region")
+choro <- merge(states, police, sort = FALSE, by.x = 'region', by.y = "state")
 choro <- choro[order(choro$order), ]
 ggplot(choro, aes(long, lat)) +
-  geom_polygon(aes(group = group, fill = assault)) +
+  geom_polygon(aes(group = group, fill = n)) +
   coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
 
-ggplot(choro, aes(long, lat)) +
-geom_polygon(aes(group = group, fill = assault / murder)) +
-coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
+#ggplot(choro, aes(long, lat)) +
+#geom_polygon(aes(group = group, fill = assault / murder)) +
+#coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
 #Code from https://ggplot2.tidyverse.org/reference/map_data.html
 ```
 
