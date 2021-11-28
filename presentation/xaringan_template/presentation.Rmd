@@ -293,8 +293,9 @@ police_time_race_proportion <- police_data %>%
       year == 2019 & n == 249 ~ 249/60724311,
       year == 2019 & n == 17 ~ 17/4267113))
 
-ggplot() + geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, fill = race)) + facet_wrap(~ year, nrow = 4) + labs( x = "Race", y = "Proportion of Populations who have Died by Police", title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45))
-    
+ggplot() + geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, fill = race)) + facet_wrap(~ year, nrow = 4) + labs( x = "Race", y = "Proportion of Populations who have Died by Police", title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45)) 
+
+#
   #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
 ```
 
@@ -307,11 +308,7 @@ police_data_innocent <- police_data %>%
    mutate(year = str_sub(doi,-4,-1)) %>%
   group_by(firstzip, year)
 
-ggplot(police_data_innocent,
-       aes(x = year,
-           y = ,
-          colour = race )) +
-  geom_point()
+
 
 
 

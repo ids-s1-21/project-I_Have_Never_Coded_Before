@@ -10,6 +10,10 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(here)
+library(config)
+library(plotly)
+library(widgetframe)
+library(htmlwidgets)
 ```
 
 
@@ -155,6 +159,42 @@ linear_reg() %>%
 
 ```{r innocent}
 #create a histogram with frequency and alleged weapon
+
+```
+
+
+```{r heat_map}
+states_map <- map_data("state")
+  ggplot(crimes, aes(map_id = state)) +
+    geom_map(aes(fill = Murder), map = states_map) +
+    expand_limits(x = states_map$long, y = states_map$lat)
+
+  last_plot() + coord_map()
+  ggplot(crimes_long, aes(map_id = state)) +
+    geom_map(aes(fill = value), map = states_map) +
+    expand_limits(x = states_map$long, y = states_map$lat) +
+    facet_wrap( ~ variable)
+
+state_heat_map <- map_data("state")
+ggplot(police_data,
+       aes(map_id = state)) +
+  geom_map(aes(fill = abs(age)), map = state_heat_map) +
+  expand_limits(x = abs(police_data$longitude), y = abs(police_data$latitude))
+
+
+```
+```{r 3d}
+crazy <- plot_ly(police_data,
+                 x= ~longitude, y= ~latitude, z = ~age,
+                 marker = list(size = 3,
+                               color = "lightgray", 
+                               alpha = 0.5,
+                               line = list(color = "gray",
+                                           width = 2))) %>%
+  add_markers() %>%
+  config(displayModeBar = FALSE)
+frameWidget(crazy)
+
 
 ```
 
