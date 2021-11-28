@@ -38,7 +38,9 @@ head(police_data)
 
 glimpse(head(police_data))
 
-police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, loi_address = `Location of injury (address)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, description_temp = `Description Temp`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`) %>% mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% mutate(year = str_sub(doi,-4,-1))
+police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, loi_address = `Location of injury (address)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, description_temp = `Description Temp`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`) %>% 
+  mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% 
+  mutate(year = str_sub(doi,-4,-1))
 
 #doi = date of injury resulting in death, loi= location of injury resulting in death, lod = location of death, hlof = highest level of force, iuof = intended use of force
 
@@ -129,13 +131,18 @@ glance(model)
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
 # in my slides. But I need the resulting data frame for a plot I want to present.
 #iris_modified <- iris %>%
-police_time_race <-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% mutate(race = case_when(
+police_time_race <-police_data %>% 
+  mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(race = case_when(
       name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
-      TRUE ~ race
-    )
-  ) %>% group_by(year,race) %>% count(year) 
+      TRUE ~ race)) %>% 
+  group_by(year,race) %>% 
+  count(year) 
 
-ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + facet_wrap(~ race, nrow = 4) + labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45))
+ggplot() + 
+  geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + 
+  facet_wrap(~ race, nrow = 4) + 
+  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45))
 
 #https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 
@@ -220,8 +227,17 @@ choro <- merge(states, police, sort = FALSE, by.x = 'region', by.y = "state")
 choro <- choro[order(choro$order), ]
 ggplot(choro, aes(long, lat)) +
   geom_polygon(aes(group = group, fill = n)) + 
-  labs(fill = "Prop. of Deaths by State Pop.") + 
-  theme_minimal() 
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_rect(fill = "white", colour = "white")) +
+  labs(fill = "Prop. of Deaths by State Pop.", 
+       title = "Proprtion of Police Related Deaths by State") + 
+  scale_fill_gradient(low = "cornflowerblue", high = "blue4")
+
 
   coord_map("albers",  lat0 = 45.5, lat1 = 29.5) 
   
@@ -244,13 +260,12 @@ ggplot(choro, aes(long, lat)) +
 ```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
 # see how I changed out.width and fig.width from defaults
 # to make the figure bigger
-police_time_race_proportion <- police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% 
-  mutate(
-    race = case_when(
-      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
-      TRUE ~ race
-    )
-  ) %>% filter(year == 2000) 
+#police_time_race_proportion <- police_data %>% 
+  #mutate(year = str_sub(doi,-4,-1)) %>% 
+  #mutate(race = case_when(
+   #   name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+     # TRUE ~ race)) %>% 
+  #filter(year == 2000) 
 
 
 ```
@@ -265,15 +280,15 @@ If you want to generate a table, make sure it is in the HTML format (instead of 
 ```{r iris-table, echo = FALSE}
 police_time_race_proportion <- police_data %>% 
   mutate(year = str_sub(doi,-4,-1)) %>% 
-  mutate(
-    race = case_when(
+  mutate(race = case_when(
       name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
-      TRUE ~ race
-    )
-  ) %>% 
-  filter(year == 2000 | year == 2010 | year == 2019) %>% filter(race == "African-American/Black" | race == "Asian/Pacific Islander" | race == "European-American/White" | race == 	
-"Hispanic/Latino"  | race == 	
-"Native American/Alaskan") %>% 
+      TRUE ~ race)) %>% 
+  filter(year == 2000 | year == 2010 | year == 2019) %>% 
+  filter(race == "African-American/Black" | 
+         race == "Asian/Pacific Islander" | 
+         race == "European-American/White" | 
+         race == 	"Hispanic/Latino"  | 
+         race == 	"Native American/Alaskan") %>% 
   group_by(year,race)  %>% 
   count(year) %>% 
   mutate(n = case_when(
@@ -293,7 +308,11 @@ police_time_race_proportion <- police_data %>%
       year == 2019 & n == 249 ~ 249/60724311,
       year == 2019 & n == 17 ~ 17/4267113))
 
-ggplot() + geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, fill = race)) + facet_wrap(~ year, nrow = 4) + labs( x = "Race", y = "Proportion of Populations who have Died by Police", title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45)) 
+ggplot() + 
+  geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, fill = race)) + facet_wrap(~ year, nrow = 4) + 
+  labs( x = "Race", 
+        y = "Proportion of Populations who have Died by Police", 
+        title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45)) 
 
 #
   #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
@@ -319,6 +338,7 @@ police_data_innocent <- police_data %>%
 # Images
 
 ```{r wow, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+police_data
 include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
 ```
 
