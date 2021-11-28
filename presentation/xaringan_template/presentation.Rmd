@@ -233,6 +233,7 @@ ggplot(choro, aes(long, lat)) +
         axis.text.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
+        text = element_text(size=20),
         panel.background = element_rect(fill = "white", colour = "white")) +
   labs(fill = "Prop. of Deaths by State Pop.", 
        title = "Proprtion of Police Related Deaths by State") + 
