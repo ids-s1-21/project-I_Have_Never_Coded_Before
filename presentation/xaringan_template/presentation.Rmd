@@ -208,6 +208,8 @@ police_data_hm <- police_data %>%
     state == "Vermont" ~ c(n)/(330150668*0.0019),
     state == "Wyoming" ~ c(n)/(330150668*0.0017))) %>%
   arrange(desc(n))
+
+#divided number of deaths in a state by percentage of US population living in that state in 2019. Used numbers from https://simple.wikipedia.org/wiki/List_of_U.S._states_by_population
     
 states <- map_data("state")
 police <- police_data_hm
