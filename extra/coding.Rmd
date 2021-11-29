@@ -24,6 +24,12 @@ police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).c
 head(police_data)
 ```
 
+---
+class: center, middle
+
+To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+---
+
 ``` {r tidting_data}
 police_data <- subset(police_data, select = -c(6, 8, 13, 21, 22, 23, 26))
 police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`)
@@ -33,14 +39,6 @@ police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = A
 police_data <- police_data %>%
   mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% 
   mutate(year = str_sub(doi,-4,-1))
-```
-
-```{r making_new_data_set_3rd_graph}
-police_zip <- police_data %>%
-  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
-   mutate(year = str_sub(doi,-4,-1)) %>%
-  group_by(firstzip, year) %>%
-  count(year)
 ```
 
 ```{r making_new_data_set_1st_graph}
@@ -61,8 +59,63 @@ ggplot() +
 # data from https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 ```
 ---
-class: center, middle
 
-To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+```{r making_new_data_set_2nd_graph}
+police_zip <- police_data %>%
+  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
+   mutate(year = str_sub(doi,-4,-1)) %>%
+  group_by(firstzip, year) %>%
+  count(year)
+```
 
+```{r second_graph}
+ggplot(police_zip,
+       aes(x = year,
+           y = n,
+           colour = firstzip)) +
+  geom_point() +
+  facet_wrap(~ firstzip)
+```
+---
+
+```{r making_new_data_set_3rd_graph}
+police_time_race_proportion <- police_data %>% 
+  mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race)) %>% 
+  filter(year == 2000 | year == 2010 | year == 2019) %>% 
+  filter(race == "African-American/Black" | 
+         race == "Asian/Pacific Islander" | 
+         race == "European-American/White" | 
+         race == 	"Hispanic/Latino"  | 
+         race == 	"Native American/Alaskan") %>% 
+  group_by(year,race)  %>% 
+  count(year) %>% 
+  mutate(n = case_when(
+      year == 2000 & n == 125 ~ 125/34658190,
+      year == 2000 & n == 12 ~ 12/10641833,
+      year == 2000 & n == 123 ~ 123/211460626,
+      year == 2000 & n == 57 ~ 57/35305818,
+      year == 2000 & n == 13 ~ 13/2475956,
+      year == 2010 & n == 295 ~ 295/38929319,
+      year == 2010 & n == 18 ~ 22/15214265,
+      year == 2010 & n == 449 ~ 449/223553265,
+      year == 2010 & n == 156 ~ 156/ 50477594,
+      year == 2010 & n == 13 ~ 13/ 2932248,
+      year == 2019 & n == 450 ~ 439/43984096,
+      year == 2019 & n == 40 ~ 40/20022610,
+      year == 2019 & n == 669 ~ 669/197271953,
+      year == 2019 & n == 249 ~ 249/60724311,
+      year == 2019 & n == 17 ~ 17/4267113))
+```
+
+```{r third_graph}
+ggplot() + 
+  geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, fill = race)) + facet_wrap(~ year, nrow = 4) + 
+  labs( x = "Race", 
+        y = "Proportion of Populations who have Died by Police", 
+        title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45))
+
+```
 ---
