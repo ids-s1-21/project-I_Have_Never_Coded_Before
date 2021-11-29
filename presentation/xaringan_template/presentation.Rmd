@@ -24,6 +24,7 @@ library(knitr)
 library(xaringanthemer)
 library(here)
 library(usdata)
+library(maps)
 ```
 
 ```{r setup, include=FALSE}
@@ -50,13 +51,19 @@ police_data1 <- police_data %>%
 
 ```{r no, include=FALSE}
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/police.jpg"
 )
 ```
 
 class: center, middle
 
 To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+
+```{r not, include=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/police.jpg"
+)
+```
 
 ---
 
@@ -141,7 +148,7 @@ ggplot() + geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race
 
 
 ```
-
+---
 ```{r plot-iris, echo = FALSE}
 # Code hidden with echo = FALSE
 # Uses modified iris dataset from previous chunk
@@ -298,7 +305,7 @@ ggplot() + geom_col(police_time_race_proportion, mapping = aes(x = race, y = n, 
 #
   #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
 ```
-
+---
 ```{r innocent_state}
 police_data_innocent <- police_data %>%
   filter(alleged_weapon == "None" | is.na(alleged_weapon))  %>%
@@ -326,7 +333,7 @@ Or you can also include a full page image. See next slide.
 
 ---
 
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)
+background-image: url(https://www.google.com/search?q=first+digit+zip+code+map&client=avast-a-1&sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&biw=1280&bih=577&dpr=1.5#imgrc=mya_FV0kn9TnwM)
 
 ---
 
@@ -360,6 +367,8 @@ Limitations:
 `xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
 
 - And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+
+
 
 ---
 
