@@ -2,29 +2,67 @@
 title: "coding"
 output: html_document
 ---
-
+```{r load-packages, include = FALSE}
+# Add any additional packages you need to this chunk
+library(tidyverse)
+library(tidymodels)
+library(palmerpenguins)
+library(knitr)
+library(xaringanthemer)
+library(here)
+library(usdata)
+library(maps)
+```
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# For better figure resolution
+knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r load-data, include=FALSE}
+# Load your data here
+police_data <- read_csv(here("data/Innocent Deaths caused by Police (All time).csv"))
+head(police_data)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-#murder, time, race data 
-
-police_data %>% mutate(year = str_sub(doi,-4,-1)) %>% group_by(year,race) %>% count(year) %>% ggplot(police_data, aes(x = year, fill = race)) + geom_histogram()
+``` {r tidting_data}
+police_data <- subset(police_data, select = -c(6, 8, 13, 21, 22, 23, 26))
+police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r adding_new_columns}
+police_data <- police_data %>%
+  mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% 
+  mutate(year = str_sub(doi,-4,-1))
+```
+
+```{r making_new_data_set_3rd_graph}
+police_zip <- police_data %>%
+  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %>%
+   mutate(year = str_sub(doi,-4,-1)) %>%
+  group_by(firstzip, year) %>%
+  count(year)
+```
+
+```{r making_new_data_set_1st_graph}
+police_time_race <-police_data %>% 
+  mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race)) %>% 
+  group_by(year,race) %>% 
+  count(year) 
+```
+
+```{r first_graph}
+ggplot() + 
+  geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + 
+  facet_wrap(~ race, nrow = 4) + 
+  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45))
+# data from https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
+```
+---
+class: center, middle
+
+To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+
+---
