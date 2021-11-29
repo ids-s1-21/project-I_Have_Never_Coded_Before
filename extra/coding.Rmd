@@ -117,5 +117,99 @@ ggplot() +
         y = "Proportion of Populations who have Died by Police", 
         title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 45))
 
+#data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
+
 ```
 ---
+
+```{r background_code_4th_graph}
+police_data_hm <- police_data %>% 
+  filter(year == 2019) %>% 
+  count(state) %>% 
+  mutate(n = case_when(
+    state == "California" ~ 212/(330150668*0.1196),
+    state == "Texas" ~ 178/(330150668*0.0868),
+    state == "Florida" ~ 129/(330150668*0.0644),
+    state == "New York" ~ c(n)/(330150668*0.0591),
+    state == "Pennsylvania" ~ c(n)/(330150668*0.0387),
+    state == "Illinois" ~ c(n)/(330150668*0.0385),
+    state == "Ohio" ~ c(n)/(330150668*0.0353),
+    state == "Georgia" ~ c(n)/(330150668*0.0318),
+    state == "North Carolina" ~ c(n)/(330150668*0.0314),
+    state == "Michigan" ~ c(n)/(330150668*0.0302),
+    state == "New Jersey" ~ c(n)/(330150668*0.0269),
+    state == "Virginia" ~ c(n)/(330150668*0.0258),
+    state == "Washington" ~ c(n)/(330150668*0.0228),
+    state == "Arizona" ~ c(n)/(330150668*0.0217),
+    state == "Massachusetts" ~ c(n)/(330150668*0.0209),
+    state == "Tennessee" ~ c(n)/(330150668*0.0205),
+    state == "Indiana" ~ c(n)/(330150668*0.0202),
+    state == "Missouri" ~ c(n)/(330150668*0.0185),
+    state == "Maryland" ~ c(n)/(330150668*0.0183),
+    state == "Wisconsin" ~ c(n)/(330150668*0.0176),
+    state == "Colorado" ~ c(n)/(330150668*0.0172),
+    state == "Minnesota" ~ c(n)/(330150668*0.0170),
+    state == "South Carolina" ~ c(n)/(330150668*0.0154),
+    state == "Alabama" ~ c(n)/(330150668*0.0148),
+    state == "Louisiana" ~ c(n)/(330150668*0.0141),
+    state == "Kentucky" ~ c(n)/(330150668*0.0135),
+    state == "Oregon" ~ c(n)/(330150668*0.0127),
+    state == "Oklahoma" ~ c(n)/(330150668*0.0119),
+    state == "Connecticut" ~ c(n)/(330150668*0.0108),
+    state == "Utah" ~ c(n)/(330150668*0.0096),
+    state == "Iowa" ~ c(n)/(330150668*0.0095),
+    state == "Nevada" ~ c(n)/(330150668*0.0092),
+    state == "Arkansas" ~ c(n)/(330150668*0.0091),
+    state == "Mississippi" ~ c(n)/(330150668*0.0090),
+    state == "Kansas" ~ c(n)/(330150668*0.0088),
+    state == "New Mexico" ~ c(n)/(330150668*0.0063),
+    state == "Nebraska" ~ c(n)/(330150668*0.0058),
+    state == "Idaho" ~ c(n)/(330150668*0.0053),
+    state == "West Virginia" ~ c(n)/(330150668*0.0055),
+    state == "Hawaii" ~ c(n)/(330150668*0.0043),
+    state == "New Hampshire" ~ c(n)/(330150668*0.0041),
+    state == "Maine" ~ c(n)/(330150668*0.0040),
+    state == "Montana" ~ c(n)/(330150668*0.0032),
+    state == "Rhode Island" ~ c(n)/(330150668*0.0032),
+    state == "Delaware" ~ c(n)/(330150668*0.0029),
+    state == "South Dakota" ~ c(n)/(330150668*0.0027),
+    state == "North Dakota" ~ c(n)/(330150668*0.0023),
+    state == "Alaska" ~ c(n)/(330150668*0.0022),
+    state == "Vermont" ~ c(n)/(330150668*0.0019),
+    state == "Wyoming" ~ c(n)/(330150668*0.0017))) %>%
+  arrange(desc(n))
+
+#divided number of deaths in a state by percentage of US population living in that state in 2019. Used numbers from https://simple.wikipedia.org/wiki/List_of_U.S._states_by_population
+    
+states <- map_data("state")
+police <- police_data_hm
+names(police) <- tolower(names(police))
+police$state <- tolower(police_data_hm$state)
+
+choro <- merge(states, police, sort = FALSE, by.x = 'region', by.y = "state")
+choro <- choro[order(choro$order), ]
+```
+
+```{r fourth_graph, warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
+ggplot(choro, aes(long, lat)) +
+  geom_polygon(aes(group = group, fill = n)) + 
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        text = element_text(size=20),
+        panel.background = element_rect(fill = "white", colour = "white")) +
+  labs(fill = "Prop. of Deaths by State Pop.", 
+       title = "Proprtion of Police Related Deaths by State") + 
+  scale_fill_gradient(low = "cornflowerblue", high = "blue4")
+
+
+  coord_map("albers",  lat0 = 45.5, lat1 = 29.5) 
+
+#Code from https://ggplot2.tidyverse.org/reference/map_data.html
+  
+# see how I changed out.width and fig.width from defaults
+# to make the figure bigger
+```
