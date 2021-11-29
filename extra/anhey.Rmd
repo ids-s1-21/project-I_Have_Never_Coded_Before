@@ -16,6 +16,7 @@ library(knitr)
 library(xaringanthemer)
 library(here)
 library(plotly)
+library(usdata)
 ```
 
 ```{r load-data, include=FALSE}
@@ -93,4 +94,111 @@ ggplot(data = police_data_innocent, aes(x = ))
 plot_ly(x=police_data_innocent$longitude, y=police_data_innocent$latitude, z=police_data_innocent$age, type="scatter3d", mode="markers", color=police_data_innocent$race)
 ```
 
+```{r plot-iris_2010, echo = FALSE}
+# Code hidden with echo = FALSE
+# Uses modified iris dataset from previous chunk
+# Play around with height and width until you're happy with the look
+#ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+ # geom_point() + 
+  #theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
 
+#k + geom_map(aes(map_id = state), map = map) + expand_limits(x = map$long, y = map$lat)
+#map_id, alpha, color, fill, linetype, size
+
+police_data_hm <- police_data %>% 
+  filter(year == 2010) %>% 
+  count(state) %>% 
+  mutate(n = case_when(
+    state == "California" ~ 212/(308745538*0.12066),
+    state == "Texas" ~ 178/(308745538*0.081444),
+    state == "Florida" ~ 129/(308745538*0.06089),
+    state == "New York" ~ c(n)/(308745538*0.06341),
+    state == "Pennsylvania" ~ c(n)/(308745538*0.040907),
+    state == "Illinois" ~ c(n)/(308745538*0.04191),
+    state == "Ohio" ~ c(n)/(308745538*0.03734),
+    state == "Georgia" ~ c(n)/(308745538*0.03209),
+    state == "North Carolina" ~ c(n)/(308745538*0.03063),
+    state == "Michigan" ~ c(n)/(308745538*0.03216),
+    state == "New Jersey" ~ c(n)/(308745538*0.02828),
+    state == "Virginia" ~ c(n)/(308745538*0.02575),
+    state == "Washington" ~ c(n)/(308745538*0.021849),
+    state == "Arizona" ~ c(n)/(308745538*0.021626),
+    state == "Massachusetts" ~ c(n)/(308745538*0.021477),
+    state == "Tennessee" ~ c(n)/(308745538*0.020528),
+    state == "Indiana" ~ c(n)/(308745538*0.02087),
+    state == "Missouri" ~ c(n)/(308745538*0.019472),
+    state == "Maryland" ~ c(n)/(308745538*0.01858),
+    state == "Wisconsin" ~ c(n)/(308745538*0.01836),
+    state == "Colorado" ~ c(n)/(308745538*0.0165),
+    state == "Minnesota" ~ c(n)/(308745538*0.01713),
+    state == "South Carolina" ~ c(n)/(308745538*0.01488),
+    state == "Alabama" ~ c(n)/(308745538*0.01532),
+    state == "Louisiana" ~ c(n)/(308745538*0.01466),
+    state == "Kentucky" ~ c(n)/(308745538*0.01405),
+    state == "Oregon" ~ c(n)/(308745538*0.01248),
+    state == "Oklahoma" ~ c(n)/(308745538*0.01206),
+    state == "Connecticut" ~ c(n)/(308745538*0.0114236),
+    state == "Utah" ~ c(n)/(308745538*0.009169),
+    state == "Iowa" ~ c(n)/(308745538*0.009791),
+    state == "Nevada" ~ c(n)/(308745538*0.008599),
+    state == "Arkansas" ~ c(n)/(308745538*0.009425),
+    state == "Mississippi" ~ c(n)/(308745538*0.009587),
+    state == "Kansas" ~ c(n)/(308745538*0.009201),
+    state == "New Mexico" ~ c(n)/(308745538*0.006587),
+    state == "Nebraska" ~ c(n)/(308745538*0.005865),
+    state == "Idaho" ~ c(n)/(308745538*0.005052),
+    state == "West Virginia" ~ c(n)/(308745538*0.005914),
+    state == "Hawaii" ~ c(n)/(308745538*0.00421),
+    state == "New Hampshire" ~ c(n)/(308745538*0.004288),
+    state == "Maine" ~ c(n)/(308745538*0.00425),
+    state == "Montana" ~ c(n)/(308745538*0.003174),
+    state == "Rhode Island" ~ c(n)/(308745538*0.003423),
+    state == "Delaware" ~ c(n)/(308745538*0.00288),
+    state == "South Dakota" ~ c(n)/(308745538*0.002656),
+    state == "North Dakota" ~ c(n)/(308745538*0.0023),
+    state == "Alaska" ~ c(n)/(308745538*0.00295),
+    state == "Vermont" ~ c(n)/(308745538*0.00201),
+    state == "Wyoming" ~ c(n)/(308745538*0.00177))) %>%
+  arrange(desc(n))
+    
+states <- map_data("state")
+police <- police_data_hm
+names(police) <- tolower(names(police))
+police$state <- tolower(police_data_hm$state)
+
+choro <- merge(states, police, sort = FALSE, by.x = 'region', by.y = "state")
+choro <- choro[order(choro$order), ]
+ggplot(choro, aes(long, lat)) +
+  geom_polygon(aes(group = group, fill = n)) + 
+  labs(fill = "Prop. of Deaths by State Pop.") + 
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_rect(fill = "white", colour = "white")) +
+  labs(fill = "Prop. of Deaths by State Pop.", 
+       title = "Proprtion of Police Related Deaths by State") + 
+  scale_fill_gradient(low = "cornflowerblue", high = "blue4")
+
+
+  coord_map("albers",  lat0 = 45.5, lat1 = 29.5) 
+  
+
+#ggplot(choro, aes(long, lat)) +
+#geom_polygon(aes(group = group, fill = assault / murder)) +
+#coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
+#Code from https://ggplot2.tidyverse.org/reference/map_data.html
+```
+
+
+```{r 2010_deaths_bystate}
+police_data %>%
+  filter(year == "2010") %>%
+  group_by(year, state) %>%
+  count(state) %>%
+  arrange(n)
+
+
+```
