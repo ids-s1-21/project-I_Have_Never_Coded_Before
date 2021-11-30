@@ -1,6 +1,6 @@
 --- 
-title: "Innocent Death's caused by Police Project"
-subtitle: "Presentation subtitle (if any)"
+title: "Investigating factors which could affect the likelihood of a person getting killed by the police"
+subtitle: " "
 author: "I Have Never Coded Before<br> Abhey Reuben Mieke"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
@@ -52,38 +52,69 @@ head(police_data)
 
 class: center, middle
 
-To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+HYPOTHESIS
 ---
+class: center, middle
+
+Examples of tidying the data set
 
 ``` {r tidting_data, include = FALSE}
 police_data <- subset(police_data, select = -c(6, 8, 13, 21, 22, 23, 26))
+
 police_data <- rename(police_data, unique_id = `Unique ID`, name = Name, age = Age, gender = Gender, race = Race, doi = `Date of injury resulting in death (month/day/year)`, state = State, lod_zip_code = `Location of death (zip code)` , lod_county = `Location of death (county)`, latitude = Latitude, longitude = Longitude,  agency_involved = `Agency or agencies involved`, hlof = `Highest level of force`, alleged_weapon = `Alleged weapon`, agressive_movement = `Aggressive physical movement`, fleeing_not_fleeing = `Fleeing/Not fleeing`, dispositions_exclusions =`Dispositions/Exclusions INTERNAL USE, NOT FOR ANALYSIS`, iuof = `Intended use of force (Developing)`, mental_illness = `Foreknowledge of mental illness`)
+
+
 ```
 
-```{r adding_new_columns, inlcude = FALSE}
+```{r tidying_data_for_show}
+police_data <- police_data %>% 
+  mutate(year = str_sub(doi,-4,-1)) %>% 
+  mutate(race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race))
+
+```
+
+```{r adding_new_columns, include = FALSE}
 police_data <- police_data %>%
   mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% 
   mutate(year = str_sub(doi,-4,-1))
 ```
 
 ```{r making_new_data_set_1st_graph, include = FALSE}
-police_time_race <-police_data %>% 
-  mutate(year = str_sub(doi,-4,-1)) %>% 
-  mutate(race = case_when(
-      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
-      TRUE ~ race)) %>% 
+police_time_race <- police_data %>% 
   group_by(year,race) %>% 
   count(year) 
 ```
+
+
+
 ---
 ```{r first_graph, warning=FALSE, message=FALSE, results = 'hide', echo = FALSE}
 ggplot() + 
   geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + 
   facet_wrap(~ race, nrow = 4) + 
-  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45))
+  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme(legend.position = "none")
 # data from https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 ```
 ---
+```{r addition_to_first_graph, warning=FALSE, message=FALSE, results = 'hide', echo = FALSE}
+middle_eastern <- police_time_race %>%
+  filter(race == "Middle Eastern")
+
+ggplot() + 
+  geom_col(middle_eastern, mapping = aes(x = year, y = n)) + 
+  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race", 
+        subtitle = "Taking a closer look at just Middle Eastern") + scale_x_discrete(guide = guide_axis(angle = 45)) +
+  theme(legend.position = "none")
+
+```
+
+---
+
+class: center, middle
+
 # Grouped States by First Zip
 
 ```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo from ZipCodeDownload"}
@@ -104,7 +135,13 @@ ggplot(police_zip,
            y = n,
            colour = firstzip)) +
   geom_point() +
-  facet_wrap(~ firstzip)
+  facet_wrap(~ firstzip) +
+   labs(x = "Year",
+        y = "Frequency", 
+       title = "Police Deaths by Grouped States") + 
+  scale_x_discrete("Year", breaks=seq(2000,2020,5),
+                   guide = guide_axis(angle = 45)) 
+  
 ```
 ---
 

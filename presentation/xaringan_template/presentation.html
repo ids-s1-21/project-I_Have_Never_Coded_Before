@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Innocent Death’s caused by Police Project</title>
+    <title>Investigating factors which could affect the likelihood of a person getting killed by the police</title>
     <meta charset="utf-8" />
     <meta name="author" content="I Have Never Coded Before  Abhey Reuben Mieke" />
     <meta name="date" content="2021-11-30" />
@@ -12,8 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Innocent Death’s caused by Police Project
-## Presentation subtitle (if any)
+# Investigating factors which could affect the likelihood of a person getting killed by the police
 ### I Have Never Coded Before<br> Abhey Reuben Mieke
 ### University of Edinburgh
 ### 2021-11-30
@@ -37,22 +36,38 @@ output: html_document
 
 class: center, middle
 
-To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
+HYPOTHESIS
 ---
+class: center, middle
+
+Examples of tidying the data set
 
 
 
 
 ```r
-police_data &lt;- police_data %&gt;%
-  mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %&gt;% 
-  mutate(year = str_sub(doi,-4,-1))
+police_data &lt;- police_data %&gt;% 
+  mutate(year = str_sub(doi,-4,-1)) %&gt;% 
+  mutate(race = case_when(
+      name == "Oliver Sevin Frazier-Savoy" ~ "European-American/White",
+      TRUE ~ race))
 ```
+
+
+
+
+
 
 
 ---
 &lt;img src="presentation_files/figure-html/first_graph-1.png" width="80%" /&gt;
 ---
+&lt;img src="presentation_files/figure-html/addition_to_first_graph-1.png" width="80%" /&gt;
+
+---
+
+class: center, middle
+
 # Grouped States by First Zip
 
 &lt;div class="figure" style="text-align: center"&gt;
