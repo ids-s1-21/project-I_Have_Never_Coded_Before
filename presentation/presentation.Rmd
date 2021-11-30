@@ -36,6 +36,11 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 title: "coding"
 output: html_document
 
+```{r include=FALSE}
+style_xaringan(
+  title_slide_background_image = "img/opening.jpg"
+)
+```
 
 
 ```{r load-data, include=FALSE}
@@ -79,6 +84,11 @@ ggplot() +
 # data from https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 ```
 ---
+# Zip Codes
+
+```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo from ZipCodeDownload"}
+include_graphics("https://streamofcoding.com/content/images/2021/04/00_zip_codes.png")
+```
 
 ```{r making_new_data_set_2nd_graph, include = FALSE}
 police_zip <- police_data %>%
