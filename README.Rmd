@@ -6,6 +6,27 @@ output: github_document
 
 ## Summary
 
+Firstly, we wanted to identify whether there was any change to the number of police deaths over time. Although time itself does not have a causal relationship with police deaths, we can infer that potentially political and societal factors do have an effect. Over time these factors will change and in turn will alter the number of deaths at the hands of police each year. We decided to facet our plot by race to identify whether there were any noticeable changes over time.
+
+Overall, relative to other races we found that Native American/Alaskan, Asian/Pacific Islander and Middle Eastern had a relative low number of deaths per year compared to the other races. In contrast, European – American/White and African – American/Black have relatively high deaths per year. Both show an increase from 2000 until around 2015 and then they both plateau before having a noticeable decrease in 2021. This is understandable as 2021 is not a full year sample. However, another aspect which is striking is the close proximity in the number of deaths between European – American/White and African – American/Black races. Which begs the question how do the deaths per year for each race reflect as a proportion of the population?
+
+This is what we looked at next as although in the first plot it seems that police related deaths have increased overall from 2000 to 2020, we have not considered how the population changes. So, we sampled three years 2000, 2010 and 2019 and then for each race divided the number of deaths by the race population for that year. This meant we could identify whether there had in fact been a change in police deaths for each race per capita. We used population data gathered from the US census for each of these years. One of the issues that cropped up was that there was no population category for Middle Eastern in the census, so we added the Middle Eastern deaths to the Asian/Pacific Islander deaths and divided this result by the Asian/Pacific Islander population. This allowed us to analyse all races for each year. 
+
+What we found was that in 2000 the highest police deaths per capita for a race was for Native American/ Alaskan group followed by African – American/Black. In 2010 and 2019 the highest police deaths per capita was recorded as African – American/Black by a noticeable difference to any other race. This would strongly suggest that race does contribute to a person’s likelihood of being shot by the police and confirms our preconceptions that there is racial discrimination within the US police force. Furthermore, there is an increase in deaths by police per capita for this race over time suggesting that the racial discrimination within the police force is not being addressed and is in fact getting worse. Another thing we can note is that consistently for all three years Asian/Pacific Islanders had the smallest deaths by police per capita. 
+
+
+
+/// Insert RA Paragraph /// 
+
+
+We then wanted to visualise our results from the Police Deaths by Grouped States plot and view how this looked on a geographical map of the United States. So, we sourced some code to create a heat map1 and using the 2019 police related deaths data and the 2019 census data we were able to plot the number of police related deaths per capita for each state. The more central states have the greatest police related deaths per capita and in general these states are the more pro-gun states. The map shows that western costal states and north-eastern costal states tend to have less gun related deaths and are usually more democratic states where guns are less popular. Thus suggesting, the state in which you live in plays a role in how likely you are to be shot by the police.
+
+References
+1 https://ggplot2.tidyverse.org/reference/geom_map.html
+https://en.wikipedia.org/wiki/Red_states_and_blue_states
+https://worldpopulationreview.com/state-rankings/gun-ownership-by-state
+
+
 Write-up of your project and findings go here. 
 Think of this as the text of your presentation. 
 The length should be roughly 5 minutes when read out loud.
