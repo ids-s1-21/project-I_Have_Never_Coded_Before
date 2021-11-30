@@ -194,7 +194,7 @@ ggplot() +
 
 ```
 
-```{more code 1}
+```{r more_code_1}
 police_data_innocent <- police_data %>%
   filter(alleged_weapon == "None" | is.na(alleged_weapon))  %>%
   filter(agressive_movement == "None" | is.na(agressive_movement)) %>%

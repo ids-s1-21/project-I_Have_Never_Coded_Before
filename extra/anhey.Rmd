@@ -15,7 +15,7 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(here)
-library(plotly)
+#library(plotly)
 library(usdata)
 ```
 
