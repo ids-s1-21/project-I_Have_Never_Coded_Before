@@ -153,7 +153,7 @@ ggplot(choro, aes(long, lat)) +
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{more code}
+```{r more_code}
 police_time_race_proportion <- police_data %>% 
   mutate(year = str_sub(doi,-4,-1)) %>% 
   mutate(race = case_when(
