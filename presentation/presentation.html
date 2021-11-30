@@ -4,7 +4,7 @@
     <title>Innocent Death’s caused by Police Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="I Have Never Coded Before  Abhey Reuben Mieke" />
-    <meta name="date" content="2021-11-29" />
+    <meta name="date" content="2021-11-30" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -16,13 +16,18 @@ class: center, middle, inverse, title-slide
 ## Presentation subtitle (if any)
 ### I Have Never Coded Before<br> Abhey Reuben Mieke
 ### University of Edinburgh
-### 2021-11-29
+### 2021-11-30
 
 ---
 
 
 
 
+
+
+
+title: "coding"
+output: html_document
 
 
 
@@ -32,243 +37,37 @@ class: center, middle, inverse, title-slide
 class: center, middle
 
 To see if there is a correlation between dying by the police and being innocent. We started off the presentation thinking there's no correlation.
-
-
-
 ---
 
-class: inverse, center, middle
 
-# Section title
-
----
-
-# Hello World
-
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
-
----
-
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
-
-.pull-left[
-or text in two columns `\(^*\)`
-]
-.pull-right[
-- like
-- this
-]
-
-.footnote[
-[*] And add footnotes
-]
-
----
-
-# Code
 
 
 ```r
-# a boring regression
-model &lt;- lm(dist ~ speed, data = cars)
-tidy(model)
+police_data &lt;- police_data %&gt;%
+  mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %&gt;% 
+  mutate(year = str_sub(doi,-4,-1))
 ```
 
-```
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
-## 2 speed           3.93     0.416      9.46 1.49e-12
-```
-
-```r
-glance(model)
-```
-
-```
-## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
-## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
-```
 
 ---
-
-# Plots
-
-&lt;img src="presentation_files/figure-html/recode-species-1.png" width="80%" /&gt;
----
-&lt;img src="presentation_files/figure-html/plot-iris-1.png" width="80%" /&gt;
-
-```
-## &lt;ggproto object: Class CoordMap, Coord, gg&gt;
-##     aspect: function
-##     backtransform_range: function
-##     clip: on
-##     default: FALSE
-##     distance: function
-##     is_free: function
-##     is_linear: function
-##     labels: function
-##     limits: list
-##     modify_scales: function
-##     orientation: NULL
-##     params: list
-##     projection: albers
-##     range: function
-##     render_axis_h: function
-##     render_axis_v: function
-##     render_bg: function
-##     render_fg: function
-##     setup_data: function
-##     setup_layout: function
-##     setup_panel_guides: function
-##     setup_panel_params: function
-##     setup_params: function
-##     train_panel_guides: function
-##     transform: function
-##     super:  &lt;ggproto object: Class CoordMap, Coord, gg&gt;
-```
-
+&lt;img src="presentation_files/figure-html/first_graph-1.png" width="80%" /&gt;
 ---
 
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-
-]
 
 ---
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-&lt;img src="presentation_files/figure-html/iris-table-1.png" width="80%" /&gt;
+&lt;img src="presentation_files/figure-html/second_graph-1.png" width="80%" /&gt;
 ---
-
-```r
-police_data_innocent &lt;- police_data %&gt;%
-  filter(alleged_weapon == "None" | is.na(alleged_weapon))  %&gt;%
-  filter(agressive_movement == "None" | is.na(agressive_movement)) %&gt;%
-  filter(fleeing_not_fleeing == "Not fleeing" | is.na(fleeing_not_fleeing))  %&gt;%
-  mutate("firstzip" = str_sub(lod_zip_code, -5,-5)) %&gt;% 
-   mutate(year = str_sub(doi,-4,-1)) %&gt;%
-  group_by(firstzip, year)
-```
-
----
-
-# Images
-
-
-```
-## # A tibble: 30,860 × 21
-##    unique_id name     age gender race  doi   `Location of de… state lod_zip_code
-##        &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;        &lt;dbl&gt;
-##  1     25747 Mark …    21 Male   Afri… 1/1/… Detroit          Mich…        48203
-##  2     25748 Phill…    19 Male   Afri… 1/1/… Detroit          Mich…        48203
-##  3     25746 Samue…    17 Male   Euro… 1/1/… Willits          Cali…        95490
-##  4     25749 Mark …    23 Male   Hisp… 1/1/… Carlsbad         New …        88220
-##  5         1 LaTan…    24 Female Afri… 1/2/… Sacramento       Cali…        95823
-##  6         2 Leste…    53 Male   Race… 1/2/… Ellenwood        Geor…        30294
-##  7     25750 Billy…    30 Male   Afri… 1/2/… Kinston          Nort…        28501
-##  8     25751 Terry…    29 Male   Afri… 1/2/… Kinston          Nort…        28501
-##  9     28711 Jimmy…    25 Male   Race… 1/2/… Savannah         Geor…        31405
-## 10     28712 Carl …    35 Male   Race… 1/2/… Savannah         Geor…        31405
-## # … with 30,850 more rows, and 12 more variables: lod_county &lt;chr&gt;,
-## #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, agency_involved &lt;chr&gt;, hlof &lt;chr&gt;,
-## #   alleged_weapon &lt;chr&gt;, agressive_movement &lt;chr&gt;, fleeing_not_fleeing &lt;chr&gt;,
-## #   dispositions_exclusions &lt;chr&gt;, iuof &lt;chr&gt;, mental_illness &lt;chr&gt;, year &lt;chr&gt;
-```
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80" alt="Image credit: Photo by Jörg Angeli on Unsplash." width="60%" /&gt;
-&lt;p class="caption"&gt;Image credit: Photo by Jörg Angeli on Unsplash.&lt;/p&gt;
-&lt;/div&gt;
-
-Or you can also include a full page image. See next slide.
-
----
-
-background-image: url(https://www.google.com/search?q=first+digit+zip+code+map&amp;client=avast-a-1&amp;sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&amp;biw=1280&amp;bih=577&amp;dpr=1.5#imgrc=mya_FV0kn9TnwM)
-
----
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# Feeling adventurous?
-
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
-
-- You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
-
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
 
 
 
 ---
-
-background-image: url(https://www.google.com/search?q=first+digit+zip+code+map&amp;client=avast-a-1&amp;sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&amp;biw=1280&amp;bih=577&amp;dpr=1.5#imgrc=mya_FV0kn9TnwM)
-
+  
+&lt;img src="presentation_files/figure-html/third_graph-1.png" width="80%" /&gt;
 ---
 
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://www.google.com/search?q=first+digit+zip+code+map&amp;client=avast-a-1&amp;sxsrf=AOaemvIfjvSPwTFnTZg8yUpp9bTWMuvZCg:1637760678673&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=2ahUKEwjzs-r7jbH0AhVQ4aQKHbjUB3UQ_AUoAXoECAEQAw&amp;biw=1280&amp;bih=577&amp;dpr=1.5#imgrc=mya_FV0kn9TnwM" alt="Image credit: Photo by Jörg Angeli on Unsplash." width="60%" /&gt;
-&lt;p class="caption"&gt;Image credit: Photo by Jörg Angeli on Unsplash.&lt;/p&gt;
-&lt;/div&gt;
+---
+&lt;img src="presentation_files/figure-html/fourth_graph-1.png" width="100%" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
