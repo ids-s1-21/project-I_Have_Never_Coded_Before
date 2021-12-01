@@ -38,7 +38,7 @@ output: html_document
 
 ```{r include=FALSE}
 style_xaringan(
-  title_slide_background_image = "img/opening.jpg"
+  title_slide_background_image = "opening.jpg"
 )
 ```
 
