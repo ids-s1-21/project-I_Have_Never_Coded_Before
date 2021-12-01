@@ -199,7 +199,7 @@ ggplot(police_zip,
 options(scipen = 5)
 ```
 ---
-```{r 4th_graph_part_1, echo = FALSE}
+```{r 4th_graph_part_1, , echo = TRUE, message=FALSE, results = 'hide', include = FALSE,  warning=FALSE}
 
 police_data_hm <- police_data %>% 
   filter(year == 2010) %>% 
@@ -287,7 +287,7 @@ ggplot(choro, aes(long, lat)) +
 #coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
 #Code from https://ggplot2.tidyverse.org/reference/map_data.html
 ```
-```{r 2010_deaths_bystate}
+```{r 2010_deaths_bystate, message=TRUE, warning=TRUE, error=TRUE}
 police_data %>%
   filter(year == "2010") %>%
   group_by(year, state) %>%
