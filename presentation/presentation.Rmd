@@ -292,7 +292,7 @@ police_data %>%
   filter(year == "2010") %>%
   group_by(year, state) %>%
   count(state) %>%
-  arrange(n)
+  arrange(desc(state))
 
 
 ```
