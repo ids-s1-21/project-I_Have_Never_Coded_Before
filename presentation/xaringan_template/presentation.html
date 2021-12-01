@@ -89,6 +89,64 @@ class: center, middle
 
 &lt;img src="presentation_files/figure-html/third_graph-1.png" width="80%" /&gt;
 ---
+&lt;img src="presentation_files/figure-html/4th_graph_part_1-1.png" width="80%" /&gt;
+
+```
+## &lt;ggproto object: Class CoordMap, Coord, gg&gt;
+##     aspect: function
+##     backtransform_range: function
+##     clip: on
+##     default: FALSE
+##     distance: function
+##     is_free: function
+##     is_linear: function
+##     labels: function
+##     limits: list
+##     modify_scales: function
+##     orientation: NULL
+##     params: list
+##     projection: albers
+##     range: function
+##     render_axis_h: function
+##     render_axis_v: function
+##     render_bg: function
+##     render_fg: function
+##     setup_data: function
+##     setup_layout: function
+##     setup_panel_guides: function
+##     setup_panel_params: function
+##     setup_params: function
+##     train_panel_guides: function
+##     transform: function
+##     super:  &lt;ggproto object: Class CoordMap, Coord, gg&gt;
+```
+
+```r
+police_data %&gt;%
+  filter(year == "2010") %&gt;%
+  group_by(year, state) %&gt;%
+  count(state) %&gt;%
+  arrange(n)
+```
+
+```
+## # A tibble: 48 × 3
+## # Groups:   year, state [48]
+##    year  state             n
+##    &lt;chr&gt; &lt;chr&gt;         &lt;int&gt;
+##  1 2010  Hawaii            1
+##  2 2010  New Hampshire     1
+##  3 2010  Vermont           1
+##  4 2010  Delaware          2
+##  5 2010  Montana           2
+##  6 2010  South Dakota      2
+##  7 2010  Idaho             3
+##  8 2010  Maine             3
+##  9 2010  North Dakota      3
+## 10 2010  West Virginia     3
+## # … with 38 more rows
+```
+---
 
 ---
 &lt;img src="presentation_files/figure-html/fourth_graph-1.png" width="100%" /&gt;
