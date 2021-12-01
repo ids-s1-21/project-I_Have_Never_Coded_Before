@@ -25,7 +25,7 @@ your project.
 
 As of recently, their has been a lot of uproar about the police killing people, for example the recent death of George Floyd that sprouted mass protests. As a result, we decided to choose a data set from kaggle that was called "Innocent Deaths caused by Police". The reason why we chose this dataset is because we wanted our project to be something meaningful and show information that can help put light to an important issue. 
 
-While looking through the data-set we realized that we had a little bit of cleaning to do. The first bit of cleaning that we had to do was to make a zip code that would group countries together since having 50 different states on the x axis would be hard to read and not that effective. As a result, we took the zip code by the first number which grouped states together by geographical location. Additionally, we extracted the year from the date so we could group by year. Finally, we had to mutate the "European-American/White" race since one of the observations had different capitlization, so we added it by changing the capitalisation. 
+While looking through the data-set we realized that we had a little bit of cleaning to do. The first bit of cleaning that we had to do was to make a zip code that would group countries together since having 50 different states on the x axis would be hard to read and not that effective. As a result, we took the zip code by the first number which grouped states together by geographical location. Additionally, we extracted the year from the date so we could group by year. Finally, we had to mutate the "European-American/White" race since one of the observations had different capitlization, so we added it by changing the capitalization. 
 
 
 Column state accronym to full state
