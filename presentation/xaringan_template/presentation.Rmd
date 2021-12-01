@@ -75,6 +75,10 @@ police_data <- police_data %>%
 
 ```
 
+```{r not_exponential_form, include = FALSE}
+options(scipen = 5)
+```
+
 ```{r adding_new_columns, include = FALSE}
 police_data <- police_data %>%
   mutate(state = case_when(state == c(state) ~ abbr2state(c(state)))) %>% 
@@ -94,7 +98,9 @@ police_time_race <- police_data %>%
 ggplot() + 
   geom_col(police_time_race, mapping = aes(x = year, y = n, fill = race)) + 
   facet_wrap(~ race, nrow = 4) + 
-  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + scale_x_discrete(guide = guide_axis(angle = 45)) +
+  labs( x = "Year", y = "Number of Deaths", title = "Police Deaths by Race") + 
+  scale_x_discrete("Year", breaks=seq(2000,2021,2),
+                   guide = guide_axis(angle = 45)) +
   guides(fill = FALSE)
 # data from https://www.census.gov/prod/2001pubs/cenbr01-1.pdf
 ```
@@ -152,7 +158,7 @@ ggplot() +
         y = "Proportions", 
         title = "Proportion of Populations dying at the hands of the Police") + scale_x_discrete(guide = guide_axis(angle = 20)) +
   guides(fill = FALSE)
-
+options(scipen = 5)
 #data from cencus and middle eastern included within asian race as census does not specify middle eastern race https://www.census.gov/quickfacts/fact/table/US/PST045219, https://www.census.gov/prod/cen2010/briefs/c2010br-02.pdf, https://www.census.gov/quickfacts/fact/table/US/PST045219 calculations rounded down for 2019 as you cannot get a fraction of a person. Also combined population of asian and Native Hawaiian and Other Pacific Islander from cencus. Divided number of deaths by race for each year by population from cencus from that year.
 
 ```
@@ -190,6 +196,7 @@ ggplot(police_zip,
                    guide = guide_axis(angle = 45)) + 
   guides(colour = FALSE)
   
+options(scipen = 5)
 ```
 ---
 ```{r background_code_4th_graph, echo = TRUE, message=FALSE, results = 'hide', include = FALSE,  warning=FALSE}
