@@ -91,35 +91,10 @@ class: center, middle
 &lt;img src="presentation_files/figure-html/third_graph-1.png" width="80%" /&gt;
 ---
 
-
-```r
-police_data %&gt;%
-  filter(year == "2010") %&gt;%
-  group_by(year, state) %&gt;%
-  count(state) %&gt;%
-  arrange(desc(state))
-```
-
-```
-## # A tibble: 48 × 3
-## # Groups:   year, state [48]
-##    year  state              n
-##    &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;
-##  1 2010  Wisconsin         28
-##  2 2010  West Virginia      3
-##  3 2010  Washington        32
-##  4 2010  Virginia          26
-##  5 2010  Vermont            1
-##  6 2010  Utah              14
-##  7 2010  Texas            120
-##  8 2010  Tennessee         26
-##  9 2010  South Dakota       2
-## 10 2010  South Carolina    28
-## # … with 38 more rows
-```
+&lt;img src="presentation_files/figure-html/plot_abhey-1.png" width="100%" /&gt;
 ---
 
----
+
 &lt;img src="presentation_files/figure-html/fourth_graph-1.png" width="100%" /&gt;
 
     </textarea>
