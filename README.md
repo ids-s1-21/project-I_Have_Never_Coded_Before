@@ -4,36 +4,24 @@ by Abhey , Reuben , Mieke
 
 ## Summary
 
-Write-up of your project and findings go here. Think of this as the text
-of your presentation. The length should be roughly 5 minutes when read
-out loud. Although pacing varies, a 5-minute speech is roughly 750
-words. To use the word count addin, select the text you want to count
-the words of (probably this is the Summary section of this document, go
-to Addins, and select the `Word count` addin). This addin counts words
-using two different algorithms, but the results should be similar and as
-long as you’re in the ballpark of 750 words, you’re good! The addin will
-ignore code chunks and only count the words in prose.
+As of recently, there has been a lot of uproar about the police killing people, for example the recent death of George Floyd that sprouted mass protests. As a result, we decided to choose the "Innocent Deaths caused by Police" data-set from kaggle. We chose this data-set because we wanted our project to be meaningful and show information that can shed light on an important issue. 
 
-You can also load your data here and present any analysis results /
-plots, but I strongly urge you to keep that to a minimum (maybe only the
-most important graphic, if you have one you can choose). And make sure
-to hide your code with `echo = FALSE` unless the point you are trying to
-make is about the code itself. Your results with proper output and
-graphics go in your presentation, this space is for a brief summary of
-your project.
+The first bit of cleaning that we had to do was to make a zip code that would group countries together since having 50 different states on the x-axis would be hard to read. As a result, we took the zip code by the first number which grouped states together by geographical location. Additionally, we extracted the year from the date so we could group by year. Finally, we mutated the "European-American/White" race since one of the observations had different capitalization, so we added it by changing the capitalization.
 
+ For the first plot, we wanted to identify whether there was any change to the number of police deaths over time. Although time itself does not have a causal relationship with police deaths, we can infer that potentially political and societal factors do have an effect. These factors will change and alter the number of deaths at the hands of police each year. We facetted our plot by race to identify whether there were any noticeable changes over time.
+ 
+Overall, we found that Native American/Alaskan, Asian/Pacific Islander and Middle Eastern had a relatively low number of deaths per year. In contrast, European – American/White and African – American/Black have relatively high deaths per year. Both show an increase from 2000 until around 2015 and then plateau before having a noticeable decrease in 2021. This is understandable as 2021 isn’t a full year sample. However, another striking feature is the close proximity in the number of deaths between European – American/White and African – American/Black races. Which begs the question how do deaths per year for each race reflect as a proportion of the population?
 
-As of recently, their has been a lot of uproar about the police killing people, for example the recent death of George Floyd that sprouted mass protests. As a result, we decided to choose a data set from kaggle that was called "Innocent Deaths caused by Police". The reason why we chose this dataset is because we wanted our project to be something meaningful and show information that can help put light to an important issue. 
+So, we sampled three years 2000, 2010 and 2019 and then for each race divided the number of deaths by the race population for that year. We could then identify whether there had been a change in police deaths for each race per capita. We used data gathered from the US census for these years. An issue that cropped up was that there wasn’t a population category for Middle Eastern in the census, so we added the Middle Eastern deaths to the Asian/Pacific Islander deaths and divided this result by the Asian/Pacific Islander population. This allowed us to analyse all races for each year.
+ 
+We found that in 2000 the highest police deaths per capita for a race was for Native American/ Alaskan group followed by African – American/Black. In 2010 and 2019 the highest police deaths per capita was clearly recorded as African – American/Black. This would strongly suggest that race does contribute to a person’s likelihood of being killed by the police and confirms our preconceptions that there is racial discrimination within the US police force. Furthermore, there is an increase in deaths by police per capita for this race over time suggesting that the racial discrimination within the police force is prevalent and is getting worse. 
 
-While looking through the data-set we realized that we had a little bit of cleaning to do. The first bit of cleaning that we had to do was to make a zip code that would group countries together since having 50 different states on the x axis would be hard to read and not that effective. As a result, we took the zip code by the first number which grouped states together by geographical location. Additionally, we extracted the year from the date so we could group by year. Finally, we had to mutate the "European-American/White" race since one of the observations had different capitlization, so we added it by changing the capitalization. 
+ For our fourth plot, we wanted to graph something that could take into 2 variables, the state and year, with the number of deaths on the y-axis. We knew that we couldn’t facet the graph with 50 different states so we used the first number of the zip code which we mutated when cleaning the data. When we plotted this graph we found that the top three states with the highest frequency of deaths were the states that started with the zipcode 3 (southeast states),7 (south states), and 9 (west states). The states with the least amount of deaths are in the central but we can account for the fact that central states in general have a lesser population compared to other states. 
 
+We then wanted to visualise our results from the Police Deaths by Grouped States plot and view how this looked on a geographical map. We did this by calculating the proportions of death in a state against the population of that state in 2010. The heatmap shows us that the proportions of deaths in the state seem to be much higher in the south, which seems to be where views are more pro-police. Additionally, we can see that there is a white space in the middle of the map, which is where Wyoming is meant to be. This indicates to us that there were no deaths from the police in Wyoming in 2010. This seems to line up with the fact that Wyoming is one of the safest states in the US and about 9 in 10 people feel safe living there. 
+ 
+We repeated this for 2019 which showed the central states having the greatest police related deaths per capita. In general these states are pro-gun in contrast to the more democratic western coastal states and north-eastern coastal states which have less police related deaths. Thus suggesting, the state you live in plays a role in how likely you are to be shot by the police.
 
-Column state accronym to full state
-made a column year
-police_zip
-police_data
-
-How different factors affect the chances of dying at the hands of the police?
 
 
 
@@ -121,12 +109,9 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
+Kaggle.com. 2021. Innocent Deaths caused by Police (All time). [online] Available at: <https://www.kaggle.com/kannan1314/innocent-deaths-caused-by-police-all-time/version/> [Accessed 22 October 2021].
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+
+
